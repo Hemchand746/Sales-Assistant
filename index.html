@@ -68,7 +68,7 @@
 
       <!-- OFFICIAL GOOGLE IDENTITY SERVICES BUTTON -->
       <div id="g_id_onload"
-           data-client_id="154926575439-qesbakdqh0276co364g346rhcmgo249n.apps.googleusercontent.com"
+           data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
            data-context="signin"
            data-ux_mode="popup"
            data-callback="onGoogleSignInSuccess"
@@ -248,18 +248,18 @@
         </div>
 
         <div class="header-actions">
-          <!-- Gemini API Key Input (hidden — key is pre-configured) -->
-          <div class="api-key-card" style="display:none;">
-            <svg class="key-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--text-secondary); margin-right: 8px;">
+          <!-- Gemini API Key Input (Optional for Custom AI RAG) -->
+          <div class="api-key-card" style="display:flex; align-items:center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 4px 10px;">
+            <svg class="key-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--accent-primary); margin-right: 8px;">
               <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.778-7.778zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3-3.5 3.5z"/>
             </svg>
-            <input type="password" id="gemini-api-key" placeholder="Enter Gemini API Key" title="Gemini API Key for real AI RAG" style="background: transparent; border: none; outline: none; color: #ffffff; font-size: 12px; width: 180px;">
+            <input type="password" id="gemini-api-key" placeholder="Gemini Key (Optional)" title="Optional Gemini API Key" style="background: transparent; border: none; outline: none; color: #ffffff; font-size: 12px; width: 140px;">
           </div>
 
           <!-- Connection Status Info -->
-          <div class="connection-status-card" style="border-color: rgba(16,185,129,0.4);">
+          <div class="connection-status-card" style="border-color: rgba(59,130,246,0.4);">
             <span class="pulse-indicator-green"></span>
-            <span class="connection-label">⚡ AI Live Mode: Active</span>
+            <span class="connection-label">⚡ Market API Engine: Active</span>
           </div>
         </div>
       </header>
@@ -277,15 +277,17 @@
                 <circle cx="11" cy="11" r="8"/>
                 <path d="m21 21-4.3-4.3"/>
               </svg>
-              <input type="text" id="nl-search-input" placeholder="e.g. 'I need a Samsung phone under 45,000 with 6000mAh battery and 1.5K display'" autocomplete="off">
+              <input type="text" id="nl-search-input" placeholder="e.g. 'iPhone under 70000 with OLED display' or 'Samsung phone under 30000 with 6000mAh battery'" autocomplete="off">
               <button class="btn btn-primary search-action-btn" id="btn-run-compare">Compare Live</button>
             </div>
             
             <div class="search-suggestions">
               <span class="suggestion-label">Suggested spec search:</span>
-              <button class="suggestion-tag" data-query="Samsung mobile under 45000 with 6000mAh battery and 1.5K display">Samsung under 45k, 6000mAh, 1.5K display</button>
-              <button class="suggestion-tag" data-query="Oneplus phone under 50000 with 120Hz display and 5000mAh">OnePlus under 50k, 120Hz, 5000mAh</button>
-              <button class="suggestion-tag" data-query="Xiaomi phone under 25000 with 5000mAh battery and AMOLED screen">Xiaomi under 25k, AMOLED screen</button>
+              <button class="suggestion-tag" data-query="iPhone under 70000 with OLED display">iPhone under 70k, OLED display</button>
+              <button class="suggestion-tag" data-query="Samsung mobile under 30000 with 6000mAh battery">Samsung under 30k, 6000mAh battery</button>
+              <button class="suggestion-tag" data-query="Vivo phone under 35000 with 1.5K display">Vivo under 35k, 1.5K display</button>
+              <button class="suggestion-tag" data-query="Pixel phone under 45000 with 120Hz screen">Pixel under 45k, 120Hz screen</button>
+              <button class="suggestion-tag" data-query="Oneplus phone under 40000 with 5500mAh battery">OnePlus under 40k, 5500mAh</button>
             </div>
 
             <!-- ==========================================
