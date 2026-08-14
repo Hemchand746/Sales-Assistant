@@ -1,15 +1,604 @@
 /**
  * AuraCompare AI - Live Product Search & Comparison (RAG)
- * Handles query parsing, live marketplace fetching, specs matching, and ranking.
+ * Multi-Category Engine: Laptops & Mobile Phones (Real Market Prices & Specs)
  */
 
 // ==========================================================================
-// COMPREHENSIVE REAL-WORLD MARKET PRODUCTS DATABASE (Updated Current Market Details)
+// REAL MARKET LAPTOP DATABASE (2025/2026 Updated Market Prices & Specs)
 // ==========================================================================
-const productDatabase = [
+const laptopDatabase = [
+  // --- APPLE MACBOOKS ---
+  {
+    id: "macbook_air_m1",
+    category: "Laptop",
+    name: "Apple MacBook Air M1 (2020)",
+    brand: "Apple",
+    price: 69900,
+    battery: "18 Hours Battery Life",
+    display: "13.3-inch Retina Display (2560 x 1600)",
+    displayGroup: "2K",
+    ram: "8GB Unified RAM",
+    storage: "256GB SSD",
+    processor: "Apple M1 (8-core CPU, 7-core GPU)",
+    camera: "720p FaceTime HD Camera",
+    imageUrl: "💻",
+    source: "Amazon.in",
+    sourceUrl: "https://www.amazon.in/s?k=MacBook+Air+M1",
+    details: `
+      <h4>Apple MacBook Air M1 Specifications</h4>
+      <p>Ultra-thin fanless design offering incredible battery life and M1 Apple Silicon performance.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹69,900 (Current Live Price)</li>
+        <li><strong>Processor:</strong> Apple M1 Chip (8-core CPU with 4 performance & 4 efficiency cores)</li>
+        <li><strong>RAM / Storage:</strong> 8GB Unified RAM / 256GB Fast SSD</li>
+        <li><strong>Display:</strong> 13.3-inch Retina display with P3 wide color (2560 x 1600 pixels)</li>
+        <li><strong>Battery / Weight:</strong> Up to 18 hours wireless web | 1.29 kg lightweight aluminum chassis</li>
+        <li><strong>Ports:</strong> 2x Thunderbolt / USB 4 ports, 3.5mm Headphone Jack</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Top value entry-level premium laptop for students, coders, and professionals under ₹70,000.
+      </div>
+    `
+  },
+  {
+    id: "macbook_air_m2",
+    category: "Laptop",
+    name: "Apple MacBook Air M2 (13.6-inch)",
+    brand: "Apple",
+    price: 89900,
+    battery: "18 Hours Battery Life",
+    display: "13.6-inch Liquid Retina Display (500 nits)",
+    displayGroup: "2K",
+    ram: "8GB Unified RAM",
+    storage: "256GB SSD",
+    processor: "Apple M2 (8-core CPU, 8-core GPU)",
+    camera: "1080p FaceTime HD Camera",
+    imageUrl: "💻",
+    source: "Flipkart",
+    sourceUrl: "https://www.flipkart.com/search?q=MacBook+Air+M2",
+    details: `
+      <h4>Apple MacBook Air M2 Specifications</h4>
+      <p>Redesigned flat chassis with MagSafe 3 charging, Liquid Retina display, and 1080p camera.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹89,900 (Market Retail)</li>
+        <li><strong>Processor:</strong> Apple M2 Chip (8-core CPU, 8-core GPU, 16-core Neural Engine)</li>
+        <li><strong>RAM / Storage:</strong> 8GB Unified RAM / 256GB SSD</li>
+        <li><strong>Display:</strong> 13.6-inch Liquid Retina display with True Tone (2560 x 1664 pixels), 500 nits</li>
+        <li><strong>Charging / Battery:</strong> MagSafe 3 dedicated charging port, up to 18 hours battery</li>
+        <li><strong>Weight:</strong> 1.24 kg ultra-portable design</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Modernized chassis with MagSafe 3 charging port under ₹90k.
+      </div>
+    `
+  },
+  {
+    id: "macbook_air_m3",
+    category: "Laptop",
+    name: "Apple MacBook Air M3 (13.6-inch)",
+    brand: "Apple",
+    price: 104900,
+    battery: "18 Hours Battery Life",
+    display: "13.6-inch Liquid Retina Display (500 nits)",
+    displayGroup: "2K",
+    ram: "8GB Unified RAM",
+    storage: "256GB SSD",
+    processor: "Apple M3 (8-core CPU, 8-core GPU)",
+    camera: "1080p FaceTime HD Camera",
+    imageUrl: "💻",
+    source: "Apple Store",
+    sourceUrl: "https://www.apple.com/in/macbook-air/",
+    details: `
+      <h4>Apple MacBook Air M3 Specifications</h4>
+      <p>M3 generation MacBook Air with hardware-accelerated ray tracing and dual external display support.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹1,04,900 (Official Market Price)</li>
+        <li><strong>Processor:</strong> Apple M3 Chip (3nm architecture, 8-core CPU, 8-core GPU)</li>
+        <li><strong>RAM / Storage:</strong> 8GB Unified RAM / 256GB SSD</li>
+        <li><strong>Display:</strong> 13.6-inch Liquid Retina, support for two external displays (lid closed)</li>
+        <li><strong>Wireless:</strong> Wi-Fi 6E + Bluetooth 5.3</li>
+        <li><strong>Weight:</strong> 1.24 kg Midnight / Starlight / Space Grey / Silver</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Latest 3nm M3 chip architecture with Wi-Fi 6E and dual monitor support.
+      </div>
+    `
+  },
+  {
+    id: "macbook_pro_m3_pro",
+    category: "Laptop",
+    name: "Apple MacBook Pro M3 Pro (14.2-inch)",
+    brand: "Apple",
+    price: 199900,
+    battery: "18 Hours Battery Life",
+    display: "14.2-inch Liquid Retina XDR 120Hz ProMotion",
+    displayGroup: "3K",
+    ram: "18GB Unified RAM",
+    storage: "512GB SSD",
+    processor: "Apple M3 Pro (11-core CPU, 14-core GPU)",
+    camera: "1080p FaceTime HD Camera",
+    imageUrl: "💻",
+    source: "Apple Store",
+    sourceUrl: "https://www.apple.com/in/macbook-pro/",
+    details: `
+      <h4>Apple MacBook Pro M3 Pro Specifications</h4>
+      <p>Workstation laptop for video editing, 3D rendering, and heavy software development.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹1,99,900 (Market Retail)</li>
+        <li><strong>Processor:</strong> Apple M3 Pro (11-core CPU, 14-core GPU, 150GB/s memory bandwidth)</li>
+        <li><strong>RAM / Storage:</strong> 18GB Unified RAM / 512GB NVMe SSD</li>
+        <li><strong>Display:</strong> 14.2-inch Liquid Retina XDR (3024 x 1964), 120Hz ProMotion, 1600 nits peak HDR</li>
+        <li><strong>Ports:</strong> 3x Thunderbolt 4, HDMI port, SDXC card slot, MagSafe 3</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Pro Workstation with 120Hz Liquid Retina XDR screen panel and Space Black finish.
+      </div>
+    `
+  },
+
+  // --- ASUS LAPTOPS ---
+  {
+    id: "asus_tuf_f15_rtx3050",
+    category: "Laptop",
+    name: "ASUS TUF Gaming F15",
+    brand: "ASUS",
+    price: 54990,
+    battery: "48Whr Battery (150W Adapter)",
+    display: "15.6-inch FHD (1920 x 1080) 144Hz IPS",
+    displayGroup: "FHD+",
+    ram: "16GB DDR4 RAM",
+    storage: "512GB NVMe M.2 SSD",
+    processor: "Intel Core i5-11400H (6-Core, up to 4.5GHz)",
+    camera: "720p HD Camera",
+    imageUrl: "💻",
+    source: "Amazon.in",
+    sourceUrl: "https://www.amazon.in/s?k=ASUS+TUF+Gaming+F15",
+    details: `
+      <h4>ASUS TUF Gaming F15 Specifications</h4>
+      <p>Durable military-grade MIL-STD-810H gaming laptop with RTX 3050 graphics card.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹54,990 (Current Best Live Price)</li>
+        <li><strong>Processor:</strong> Intel Core i5-11400H (6 Cores, 12 Threads, 12MB Cache)</li>
+        <li><strong>Graphics:</strong> NVIDIA GeForce RTX 3050 4GB GDDR6 (75W TGP with Dynamic Boost)</li>
+        <li><strong>RAM / Storage:</strong> 16GB DDR4 3200MHz RAM / 512GB PCIe 3.0 NVMe M.2 SSD</li>
+        <li><strong>Display:</strong> 15.6-inch FHD (1920 x 1080) 144Hz Refresh Rate, Anti-Glare IPS</li>
+        <li><strong>Keyboard:</strong> RGB Backlit Gaming Keyboard with highlighted WASD keys</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Top selling gaming laptop under ₹55,000 with 16GB RAM out of the box.
+      </div>
+    `
+  },
+  {
+    id: "asus_tuf_a15_rtx4050",
+    category: "Laptop",
+    name: "ASUS TUF Gaming A15",
+    brand: "ASUS",
+    price: 65990,
+    battery: "90Whr Battery (240W Adapter)",
+    display: "15.6-inch FHD (1920 x 1080) 144Hz IPS",
+    displayGroup: "FHD+",
+    ram: "16GB DDR5 RAM",
+    storage: "512GB NVMe M.2 SSD",
+    processor: "AMD Ryzen 7 7435HS (8-Core, up to 4.5GHz)",
+    camera: "720p HD Camera",
+    imageUrl: "💻",
+    source: "Flipkart",
+    sourceUrl: "https://www.flipkart.com/search?q=ASUS+TUF+A15+RTX+4050",
+    details: `
+      <h4>ASUS TUF Gaming A15 Specifications</h4>
+      <p>High performance gaming laptop with NVIDIA RTX 4050 6GB graphics and MUX Switch + NVIDIA Advanced Optimus.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹65,990 (Market Price)</li>
+        <li><strong>Processor:</strong> AMD Ryzen 7 7435HS (8 Cores, 16 Threads, 20MB Cache)</li>
+        <li><strong>Graphics:</strong> NVIDIA GeForce RTX 4050 6GB GDDR6 (140W Max TGP)</li>
+        <li><strong>RAM / Storage:</strong> 16GB DDR5 4800MHz RAM / 512GB PCIe 4.0 NVMe SSD</li>
+        <li><strong>Display:</strong> 15.6-inch FHD 144Hz vIPS Value Display</li>
+        <li><strong>Battery:</strong> Huge 90Whr Battery Bank</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> 140W Full TGP RTX 4050 gaming GPU under ₹66,000.
+      </div>
+    `
+  },
+  {
+    id: "asus_vivobook_15",
+    category: "Laptop",
+    name: "ASUS Vivobook 15",
+    brand: "ASUS",
+    price: 38990,
+    battery: "42Whr Battery (65W Fast Charger)",
+    display: "15.6-inch FHD (1920 x 1080) Anti-glare",
+    displayGroup: "FHD+",
+    ram: "8GB DDR4 RAM",
+    storage: "512GB NVMe SSD",
+    processor: "Intel Core i3-1215U (6-Core, up to 4.4GHz)",
+    camera: "720p HD Camera with Privacy Shutter",
+    imageUrl: "💻",
+    source: "Amazon.in",
+    sourceUrl: "https://www.amazon.in/s?k=ASUS+Vivobook+15",
+    details: `
+      <h4>ASUS Vivobook 15 Specifications</h4>
+      <p>Slim student and workplace laptop with 180-degree hinge and fingerprint sensor.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹38,990 (Live Retail Rate)</li>
+        <li><strong>Processor:</strong> Intel Core i3-1215U (6 Cores: 2 Performance + 4 Efficient)</li>
+        <li><strong>Graphics:</strong> Intel Iris Xe Graphics</li>
+        <li><strong>RAM / Storage:</strong> 8GB DDR4 RAM / 512GB M.2 NVMe SSD</li>
+        <li><strong>Display:</strong> 15.6-inch FHD (1920 x 1080) 16:9 ratio, 250 nits</li>
+        <li><strong>Weight:</strong> 1.7 kg thin and light body</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Reliable daily office/study thin & light laptop under ₹40k.
+      </div>
+    `
+  },
+  {
+    id: "asus_rog_strix_g16",
+    category: "Laptop",
+    name: "ASUS ROG Strix G16",
+    brand: "ASUS",
+    price: 139990,
+    battery: "90Whr Battery (280W Adapter)",
+    display: "16-inch FHD+ (1920 x 1200) 165Hz ROG Nebula Display",
+    displayGroup: "FHD+",
+    ram: "16GB DDR5 RAM",
+    storage: "1TB NVMe M.2 SSD",
+    processor: "Intel Core i7-13650HX (14-Core, up to 4.9GHz)",
+    camera: "720p HD Camera",
+    imageUrl: "💻",
+    source: "Amazon.in",
+    sourceUrl: "https://www.amazon.in/s?k=ASUS+ROG+Strix+G16",
+    details: `
+      <h4>ASUS ROG Strix G16 Specifications</h4>
+      <p>Esports gaming powerhouse with Conductonaut Extreme liquid metal cooling and Tri-Fan technology.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹1,39,990 (Market Retail)</li>
+        <li><strong>Processor:</strong> Intel Core i7-13650HX (14 Cores: 6 Performance + 8 Efficient)</li>
+        <li><strong>Graphics:</strong> NVIDIA GeForce RTX 4060 8GB GDDR6 (140W TGP)</li>
+        <li><strong>RAM / Storage:</strong> 16GB DDR5 4800MHz RAM / 1TB PCIe 4.0 NVMe SSD</li>
+        <li><strong>Display:</strong> 16-inch FHD+ (1920 x 1200) 165Hz 7ms ROG Nebula Display, 100% sRGB</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Premium esports chassis with per-key RGB keyboard and liquid metal cooling.
+      </div>
+    `
+  },
+
+  // --- HP LAPTOPS ---
+  {
+    id: "hp_victus_rtx3050",
+    category: "Laptop",
+    name: "HP Victus Gaming 15",
+    brand: "HP",
+    price: 58990,
+    battery: "52.5Whr Battery (200W Fast Charge)",
+    display: "15.6-inch FHD (1920 x 1080) 144Hz IPS",
+    displayGroup: "FHD+",
+    ram: "16GB DDR4 RAM",
+    storage: "512GB NVMe M.2 SSD",
+    processor: "AMD Ryzen 5 5600H (6-Core, up to 4.2GHz)",
+    camera: "HP Wide Vision 720p HD Camera",
+    imageUrl: "💻",
+    source: "Amazon.in",
+    sourceUrl: "https://www.amazon.in/s?k=HP+Victus+Gaming+15",
+    details: `
+      <h4>HP Victus Gaming 15 Specifications</h4>
+      <p>Popular mainstream gaming laptop featuring OMEN Gaming Hub performance tuning.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹58,990 (Market Price)</li>
+        <li><strong>Processor:</strong> AMD Ryzen 5 5600H (6 Cores, 12 Threads, 16MB Cache)</li>
+        <li><strong>Graphics:</strong> NVIDIA GeForce RTX 3050 4GB GDDR6</li>
+        <li><strong>RAM / Storage:</strong> 16GB DDR4 3200MHz RAM / 512GB PCIe NVMe M.2 SSD</li>
+        <li><strong>Display:</strong> 15.6-inch FHD (1920 x 1080) 144Hz refresh rate, 9ms response time, IPS anti-glare</li>
+        <li><strong>Audio:</strong> Dual speakers tuned by B&O</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> B&O audio tuning and OMEN Gaming Hub software controls.
+      </div>
+    `
+  },
+  {
+    id: "hp_victus_rtx4050",
+    category: "Laptop",
+    name: "HP Victus Gaming 16",
+    brand: "HP",
+    price: 74990,
+    battery: "70Whr Battery (230W Adapter)",
+    display: "16.1-inch FHD (1920 x 1080) 144Hz IPS",
+    displayGroup: "FHD+",
+    ram: "16GB DDR5 RAM",
+    storage: "512GB NVMe M.2 SSD",
+    processor: "Intel Core i5-13420H (8-Core, up to 4.6GHz)",
+    camera: "HP True Vision 1080p FHD Camera",
+    imageUrl: "💻",
+    source: "Flipkart",
+    sourceUrl: "https://www.flipkart.com/search?q=HP+Victus+16+RTX+4050",
+    details: `
+      <h4>HP Victus Gaming 16 Specifications</h4>
+      <p>16.1-inch gaming laptop with 13th Gen Intel Core CPU and RTX 4050 6GB graphics card.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹74,990 (Current Live Price)</li>
+        <li><strong>Processor:</strong> Intel Core i5-13420H (8 Cores: 4 Performance + 4 Efficient)</li>
+        <li><strong>Graphics:</strong> NVIDIA GeForce RTX 4050 6GB GDDR6</li>
+        <li><strong>RAM / Storage:</strong> 16GB DDR5 5200MHz RAM / 512GB Gen4 NVMe SSD</li>
+        <li><strong>Display:</strong> 16.1-inch FHD (1920 x 1080) 144Hz IPS, Micro-edge display</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Larger 16.1-inch screen format for gaming and creative workloads.
+      </div>
+    `
+  },
+  {
+    id: "hp_pavilion_15",
+    category: "Laptop",
+    name: "HP Pavilion 15",
+    brand: "HP",
+    price: 52990,
+    battery: "41Whr Battery (65W Smart AC Adapter)",
+    display: "15.6-inch FHD (1920 x 1080) IPS Micro-edge",
+    displayGroup: "FHD+",
+    ram: "16GB DDR4 RAM",
+    storage: "512GB NVMe SSD",
+    processor: "Intel Core i5-1235U (10-Core, up to 4.4GHz)",
+    camera: "HP Wide Vision 720p HD Camera",
+    imageUrl: "💻",
+    source: "Amazon.in",
+    sourceUrl: "https://www.amazon.in/s?k=HP+Pavilion+15",
+    details: `
+      <h4>HP Pavilion 15 Specifications</h4>
+      <p>Sleek metallic design laptop with B&O Audio and 12th Gen Intel 10-core processor.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹52,990 (Retail Price)</li>
+        <li><strong>Processor:</strong> Intel Core i5-1235U (10 Cores: 2 Performance + 8 Efficient)</li>
+        <li><strong>Graphics:</strong> Intel Iris Xe Graphics</li>
+        <li><strong>RAM / Storage:</strong> 16GB DDR4 3200MHz RAM / 512GB PCIe NVMe M.2 SSD</li>
+        <li><strong>Display:</strong> 15.6-inch FHD IPS BrightView micro-edge (1920 x 1080), 250 nits</li>
+        <li><strong>Build:</strong> Natural Silver aluminum keyboard deck</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> 16GB RAM pre-installed under ₹53,000 for effortless multitasking.
+      </div>
+    `
+  },
+
+  // --- LENOVO LAPTOPS ---
+  {
+    id: "lenovo_loq_rtx3050",
+    category: "Laptop",
+    name: "Lenovo LOQ Gaming",
+    brand: "Lenovo",
+    price: 62990,
+    battery: "60Whr Battery (170W Adapter)",
+    display: "15.6-inch FHD (1920 x 1080) 144Hz 100% sRGB IPS",
+    displayGroup: "FHD+",
+    ram: "16GB DDR5 RAM",
+    storage: "512GB NVMe M.2 SSD",
+    processor: "Intel Core i5-12450HX (8-Core, up to 4.4GHz)",
+    camera: "1080p FHD Camera with E-shutter",
+    imageUrl: "💻",
+    source: "Flipkart",
+    sourceUrl: "https://www.flipkart.com/search?q=Lenovo+LOQ+i5",
+    details: `
+      <h4>Lenovo LOQ Gaming Laptop Specifications</h4>
+      <p>High color accuracy 100% sRGB gaming laptop with LA1 AI chip and Lenovo LA AI tuning.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹62,999 (Current Best Live Price)</li>
+        <li><strong>Processor:</strong> Intel Core i5-12450HX (8 Cores: 4 Performance + 4 Efficient)</li>
+        <li><strong>Graphics:</strong> NVIDIA GeForce RTX 3050 6GB GDDR6 (95W TGP)</li>
+        <li><strong>RAM / Storage:</strong> 16GB DDR5 4800MHz RAM / 512GB PCIe 4.0 NVMe SSD</li>
+        <li><strong>Display:</strong> 15.6-inch FHD (1920 x 1080) 144Hz, 300 nits, 100% sRGB Color Gamut</li>
+        <li><strong>AI Chip:</strong> Lenovo LA1 AI Engine for real-time FPS optimization</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> 100% sRGB screen panel ideal for content creators & gamers under ₹63,000.
+      </div>
+    `
+  },
+  {
+    id: "lenovo_ideapad_slim_3",
+    category: "Laptop",
+    name: "Lenovo IdeaPad Slim 3",
+    brand: "Lenovo",
+    price: 35990,
+    battery: "47Whr Battery (65W Fast Charger)",
+    display: "15.6-inch FHD (1920 x 1080) Anti-glare",
+    displayGroup: "FHD+",
+    ram: "8GB LPDDR5 RAM",
+    storage: "512GB NVMe SSD",
+    processor: "Intel Core i3-1215U (6-Core, up to 4.4GHz)",
+    camera: "HD 720p Camera with Privacy Shutter",
+    imageUrl: "💻",
+    source: "Amazon.in",
+    sourceUrl: "https://www.amazon.in/s?k=Lenovo+IdeaPad+Slim+3",
+    details: `
+      <h4>Lenovo IdeaPad Slim 3 Specifications</h4>
+      <p>Lightweight everyday laptop with Smart Learning features and rapid charging capability.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹35,990 (Market Price)</li>
+        <li><strong>Processor:</strong> Intel Core i3-1215U (6 Cores, 8 Threads, 10MB Cache)</li>
+        <li><strong>Graphics:</strong> Intel UHD Graphics</li>
+        <li><strong>RAM / Storage:</strong> 8GB LPDDR5 4800MHz RAM / 512GB PCIe 4.0 NVMe SSD</li>
+        <li><strong>Display:</strong> 15.6-inch FHD (1920 x 1080) IPS 300 nits anti-glare</li>
+        <li><strong>Audio:</strong> Front-facing User-facing Dolby Audio Speakers</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Top selling student budget laptop under ₹36,000.
+      </div>
+    `
+  },
+  {
+    id: "lenovo_legion_slim_5",
+    category: "Laptop",
+    name: "Lenovo Legion Slim 5",
+    brand: "Lenovo",
+    price: 119990,
+    battery: "80Whr Battery (230W Adapter)",
+    display: "16-inch WQXGA (2560 x 1600) 165Hz 100% sRGB IPS",
+    displayGroup: "2K",
+    ram: "16GB DDR5 RAM",
+    storage: "1TB NVMe M.2 SSD",
+    processor: "AMD Ryzen 7 7840HS (8-Core, up to 5.1GHz)",
+    camera: "1080p FHD Camera",
+    imageUrl: "💻",
+    source: "Lenovo Store",
+    sourceUrl: "https://www.lenovo.com/in/en/laptops/legion-laptops/",
+    details: `
+      <h4>Lenovo Legion Slim 5 Specifications</h4>
+      <p>Premium Legion gaming laptop with 2.5K 165Hz 16:10 display and Legion Coldfront 5.0 cooling system.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹1,19,990 (Market Price)</li>
+        <li><strong>Processor:</strong> AMD Ryzen 7 7840HS (8 Cores, 16 Threads, 16MB Cache)</li>
+        <li><strong>Graphics:</strong> NVIDIA GeForce RTX 4060 8GB GDDR6 (140W TGP)</li>
+        <li><strong>RAM / Storage:</strong> 16GB DDR5 5600MHz RAM / 1TB Gen4 NVMe SSD</li>
+        <li><strong>Display:</strong> 16-inch WQXGA (2560 x 1600) 165Hz, 350 nits, 100% sRGB, Dolby Vision</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Outstanding 16:10 2.5K screen panel and robust Coldfront 5.0 thermal architecture.
+      </div>
+    `
+  },
+
+  // --- DELL LAPTOPS ---
+  {
+    id: "dell_15_i5",
+    category: "Laptop",
+    name: "Dell 15 Laptop",
+    brand: "Dell",
+    price: 46990,
+    battery: "41Whr Battery (65W AC Adapter)",
+    display: "15.6-inch FHD (1920 x 1080) 120Hz 250 nits",
+    displayGroup: "FHD+",
+    ram: "8GB DDR4 RAM",
+    storage: "512GB NVMe SSD",
+    processor: "Intel Core i5-1235U (10-Core, up to 4.4GHz)",
+    camera: "720p HD Camera",
+    imageUrl: "💻",
+    source: "Dell Store",
+    sourceUrl: "https://www.dell.com/en-in/shop/laptops/",
+    details: `
+      <h4>Dell 15 Laptop Specifications</h4>
+      <p>Reliable commercial & student laptop with 120Hz refresh rate display and ExpressCharge support.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹46,990 (Live Retail Price)</li>
+        <li><strong>Processor:</strong> Intel Core i5-1235U (10 Cores, 12 Threads)</li>
+        <li><strong>Graphics:</strong> Intel Iris Xe Graphics</li>
+        <li><strong>RAM / Storage:</strong> 8GB DDR4 RAM / 512GB M.2 PCIe NVMe SSD</li>
+        <li><strong>Display:</strong> 15.6-inch FHD (1920 x 1080) 120Hz Refresh Rate Narrow Border</li>
+        <li><strong>Charging:</strong> ExpressCharge - charges up to 80% in 60 mins</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Includes 120Hz screen refresh rate for smoother everyday scrolling.
+      </div>
+    `
+  },
+  {
+    id: "dell_g15_gaming",
+    category: "Laptop",
+    name: "Dell G15 5530 Gaming",
+    brand: "Dell",
+    price: 72990,
+    battery: "56Whr Battery (240W Adapter)",
+    display: "15.6-inch FHD (1920 x 1080) 120Hz IPS",
+    displayGroup: "FHD+",
+    ram: "16GB DDR5 RAM",
+    storage: "512GB NVMe M.2 SSD",
+    processor: "Intel Core i5-13450HX (10-Core, up to 4.6GHz)",
+    camera: "720p HD Camera",
+    imageUrl: "💻",
+    source: "Amazon.in",
+    sourceUrl: "https://www.amazon.in/s?k=Dell+G15+5530",
+    details: `
+      <h4>Dell G15 5530 Gaming Laptop Specifications</h4>
+      <p>Alienware-inspired thermal cooling design with Game Shift macro key boost button.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹72,990 (Market Retail)</li>
+        <li><strong>Processor:</strong> Intel Core i5-13450HX (10 Cores: 6 Performance + 4 Efficient)</li>
+        <li><strong>Graphics:</strong> NVIDIA GeForce RTX 3050 6GB GDDR6 (95W TGP)</li>
+        <li><strong>RAM / Storage:</strong> 16GB DDR5 4800MHz RAM / 512GB PCIe NVMe SSD</li>
+        <li><strong>Display:</strong> 15.6-inch FHD (1920 x 1080) 120Hz 250 nits IPS</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> Alienware-inspired thermal engineering for sustained gaming sessions.
+      </div>
+    `
+  },
+
+  // --- ACER LAPTOPS ---
+  {
+    id: "acer_nitro_v15_rtx3050",
+    category: "Laptop",
+    name: "Acer Nitro V 15 Gaming",
+    brand: "Acer",
+    price: 57990,
+    battery: "57Whr Battery (135W Adapter)",
+    display: "15.6-inch FHD (1920 x 1080) 144Hz IPS",
+    displayGroup: "FHD+",
+    ram: "16GB DDR5 RAM",
+    storage: "512GB NVMe M.2 SSD",
+    processor: "Intel Core i5-13420H (8-Core, up to 4.6GHz)",
+    camera: "720p HD Camera with Acer Temporal Noise Reduction",
+    imageUrl: "💻",
+    source: "Flipkart",
+    sourceUrl: "https://www.flipkart.com/search?q=Acer+Nitro+V+15",
+    details: `
+      <h4>Acer Nitro V 15 Gaming Specifications</h4>
+      <p>Value gaming powerhouse featuring 13th Gen Intel Core processor, DDR5 RAM, and Dual-fan cooling.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹57,990 (Current Best Live Price)</li>
+        <li><strong>Processor:</strong> Intel Core i5-13420H (8 Cores: 4 Performance + 4 Efficient)</li>
+        <li><strong>Graphics:</strong> NVIDIA GeForce RTX 3050 6GB GDDR6 VRAM</li>
+        <li><strong>RAM / Storage:</strong> 16GB DDR5 RAM / 512GB Gen4 NVMe SSD</li>
+        <li><strong>Display:</strong> 15.6-inch FHD (1920 x 1080) 144Hz Refresh Rate IPS</li>
+        <li><strong>Networking:</strong> Wi-Fi 6 + Gigabit Ethernet LAN port</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> 6GB VRAM RTX 3050 graphics card and DDR5 memory under ₹58,000.
+      </div>
+    `
+  },
+  {
+    id: "acer_swift_go_14_oled",
+    category: "Laptop",
+    name: "Acer Swift Go 14 OLED",
+    brand: "Acer",
+    price: 59990,
+    battery: "65Whr Battery (65W Type-C Fast Charger)",
+    display: "14-inch 2.8K (2880 x 1800) 90Hz OLED 500 nits",
+    displayGroup: "2K",
+    ram: "16GB LPDDR5 RAM",
+    storage: "512GB NVMe SSD",
+    processor: "Intel Core i5-13500H (12-Core, up to 4.7GHz)",
+    camera: "1440p QHD Camera with TNR",
+    imageUrl: "💻",
+    source: "Amazon.in",
+    sourceUrl: "https://www.amazon.in/s?k=Acer+Swift+Go+14+OLED",
+    details: `
+      <h4>Acer Swift Go 14 OLED Specifications</h4>
+      <p>Intel Evo certified ultrabook featuring 2.8K 90Hz OLED display panel and 1440p QHD webcam.</p>
+      <ul>
+        <li><strong>Price:</strong> ₹59,990 (Market Price)</li>
+        <li><strong>Processor:</strong> Intel Core i5-13500H (12 Cores: 4 Performance + 8 Efficient)</li>
+        <li><strong>Graphics:</strong> Intel Iris Xe Graphics</li>
+        <li><strong>RAM / Storage:</strong> 16GB LPDDR5 RAM / 512GB PCIe Gen4 NVMe SSD</li>
+        <li><strong>Display:</strong> 14-inch 2.8K (2880 x 1800) OLED 90Hz, 100% DCI-P3, 500 nits peak</li>
+        <li><strong>Weight / Body:</strong> Ultra lightweight 1.25 kg full aluminum chassis</li>
+      </ul>
+      <div class="drawer-highlight-block success-border">
+        <strong>Market Note:</strong> 2.8K 90Hz OLED display with Intel Evo certification under ₹60,000.
+      </div>
+    `
+  }
+];
+
+// ==========================================================================
+// REAL MARKET MOBILE PHONES DATABASE
+// ==========================================================================
+const mobileDatabase = [
   // --- APPLE ---
   {
     id: "apple_iphone_16_pro_max",
+    category: "Mobile",
     name: "Apple iPhone 16 Pro Max",
     brand: "Apple",
     price: 144900,
@@ -41,6 +630,7 @@ const productDatabase = [
   },
   {
     id: "apple_iphone_16",
+    category: "Mobile",
     name: "Apple iPhone 16",
     brand: "Apple",
     price: 79900,
@@ -72,6 +662,7 @@ const productDatabase = [
   },
   {
     id: "apple_iphone_15",
+    category: "Mobile",
     name: "Apple iPhone 15",
     brand: "Apple",
     price: 65900,
@@ -103,6 +694,7 @@ const productDatabase = [
   },
   {
     id: "apple_iphone_14",
+    category: "Mobile",
     name: "Apple iPhone 14",
     brand: "Apple",
     price: 56900,
@@ -136,6 +728,7 @@ const productDatabase = [
   // --- SAMSUNG ---
   {
     id: "samsung_s24_ultra",
+    category: "Mobile",
     name: "Samsung Galaxy S24 Ultra 5G",
     brand: "Samsung",
     price: 129999,
@@ -167,6 +760,7 @@ const productDatabase = [
   },
   {
     id: "samsung_s24",
+    category: "Mobile",
     name: "Samsung Galaxy S24 5G",
     brand: "Samsung",
     price: 62999,
@@ -198,6 +792,7 @@ const productDatabase = [
   },
   {
     id: "samsung_a55",
+    category: "Mobile",
     name: "Samsung Galaxy A55 5G",
     brand: "Samsung",
     price: 39999,
@@ -229,6 +824,7 @@ const productDatabase = [
   },
   {
     id: "samsung_m35",
+    category: "Mobile",
     name: "Samsung Galaxy M35 5G",
     brand: "Samsung",
     price: 19999,
@@ -260,6 +856,7 @@ const productDatabase = [
   },
   {
     id: "samsung_f54",
+    category: "Mobile",
     name: "Samsung Galaxy F54 5G",
     brand: "Samsung",
     price: 24999,
@@ -293,6 +890,7 @@ const productDatabase = [
   // --- ONEPLUS ---
   {
     id: "oneplus_12",
+    category: "Mobile",
     name: "OnePlus 12 5G",
     brand: "OnePlus",
     price: 64999,
@@ -324,6 +922,7 @@ const productDatabase = [
   },
   {
     id: "oneplus_12r",
+    category: "Mobile",
     name: "OnePlus 12R 5G",
     brand: "OnePlus",
     price: 39999,
@@ -355,6 +954,7 @@ const productDatabase = [
   },
   {
     id: "oneplus_nord_4",
+    category: "Mobile",
     name: "OnePlus Nord 4 5G",
     brand: "OnePlus",
     price: 29999,
@@ -384,41 +984,11 @@ const productDatabase = [
       </div>
     `
   },
-  {
-    id: "oneplus_nord_ce4",
-    name: "OnePlus Nord CE4 5G",
-    brand: "OnePlus",
-    price: 24999,
-    battery: 5500,
-    display: "6.7-inch FHD+ 120Hz Fluid AMOLED",
-    displayGroup: "FHD+",
-    ram: "8GB",
-    storage: "128GB",
-    processor: "Snapdragon 7 Gen 3 (4nm)",
-    camera: "50MP Sony LYT-600 OIS + 8MP Wide",
-    imageUrl: "📱",
-    source: "Flipkart",
-    sourceUrl: "https://www.flipkart.com/search?q=OnePlus+Nord+CE4",
-    details: `
-      <h4>OnePlus Nord CE4 5G Specifications</h4>
-      <p>Budget performance device with 100W SuperVOOC charging and expandable microSD storage.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹24,999 (Market Price)</li>
-        <li><strong>Battery:</strong> 5500 mAh (100W Fast Charging)</li>
-        <li><strong>Display:</strong> 6.7-inch Fluid AMOLED, FHD+ (1080 x 2412 pixels), 120Hz.</li>
-        <li><strong>Processor:</strong> Snapdragon 7 Gen 3 (4nm)</li>
-        <li><strong>Storage / RAM:</strong> 8GB RAM / 128GB (Expandable up to 1TB)</li>
-        <li><strong>Camera:</strong> 50MP Sony LYT-600 OIS + 8MP UltraWide</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> Best-selling budget device with 100W fast charging.
-      </div>
-    `
-  },
 
   // --- VIVO ---
   {
     id: "vivo_v40_pro",
+    category: "Mobile",
     name: "Vivo V40 Pro 5G",
     brand: "Vivo",
     price: 49999,
@@ -450,6 +1020,7 @@ const productDatabase = [
   },
   {
     id: "vivo_v40",
+    category: "Mobile",
     name: "Vivo V40 5G",
     brand: "Vivo",
     price: 34999,
@@ -479,167 +1050,11 @@ const productDatabase = [
       </div>
     `
   },
-  {
-    id: "vivo_v30",
-    name: "Vivo V30 5G",
-    brand: "Vivo",
-    price: 31999,
-    battery: 5000,
-    display: "6.78-inch 1.5K 120Hz Curved AMOLED",
-    displayGroup: "1.5K",
-    ram: "8GB",
-    storage: "128GB",
-    processor: "Snapdragon 7 Gen 3 (4nm)",
-    camera: "50MP VCS OIS + 50MP UltraWide",
-    imageUrl: "📱",
-    source: "Amazon.in",
-    sourceUrl: "https://www.amazon.in/s?k=Vivo+V30",
-    details: `
-      <h4>Vivo V30 5G Specifications</h4>
-      <p>Aura Light portrait phone with 1.5K curved AMOLED screen panel.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹31,999 (Current Retail)</li>
-        <li><strong>Battery:</strong> 5000 mAh (80W FlashCharge)</li>
-        <li><strong>Display:</strong> 6.78-inch Curved AMOLED, 1.5K (2800 x 1260 pixels), 120Hz, 2800 nits.</li>
-        <li><strong>Processor:</strong> Snapdragon 7 Gen 3 (4nm)</li>
-        <li><strong>Storage / RAM:</strong> 8GB RAM / 128GB</li>
-        <li><strong>Camera:</strong> 50MP VCS OIS Main + 50MP UltraWide</li>
-      </ul>
-      <div class="drawer-highlight-block">
-        <strong>Market Data Note:</strong> Smart Aura Light portrait ring flash for night portraits.
-      </div>
-    `
-  },
-
-  // --- REALME ---
-  {
-    id: "realme_gt_6",
-    name: "Realme GT 6 5G",
-    brand: "Realme",
-    price: 40999,
-    battery: 5500,
-    display: "6.78-inch 1.5K 120Hz 6000nits LTPO AMOLED",
-    displayGroup: "1.5K",
-    ram: "8GB",
-    storage: "256GB",
-    processor: "Snapdragon 8s Gen 3 (4nm)",
-    camera: "50MP Sony LYT-808 OIS + 50MP Telephoto 2x + 8MP Wide",
-    imageUrl: "📱",
-    source: "Flipkart",
-    sourceUrl: "https://www.flipkart.com/search?q=Realme+GT+6",
-    details: `
-      <h4>Realme GT 6 5G Specifications</h4>
-      <p>Flagship performance phone featuring world's brightest 6000-nit display and 120W SUPERVOOC charging.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹40,999 (Current Market Retail)</li>
-        <li><strong>Battery:</strong> 5500 mAh (120W SUPERVOOC - 50% in 10 mins)</li>
-        <li><strong>Display:</strong> 6.78-inch 8T LTPO AMOLED, 1.5K (2780 x 1264 pixels), 120Hz, 6000 nits peak.</li>
-        <li><strong>Processor:</strong> Snapdragon 8s Gen 3 (4nm)</li>
-        <li><strong>Storage / RAM:</strong> 8GB RAM / 256GB UFS 4.0</li>
-        <li><strong>Camera:</strong> 50MP Sony LYT-808 OIS + 50MP 2x Telephoto + 8MP UltraWide</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> Top performance score in ₹40k category with 120W charging.
-      </div>
-    `
-  },
-  {
-    id: "realme_13_pro_plus",
-    name: "Realme 13 Pro+ 5G",
-    brand: "Realme",
-    price: 32999,
-    battery: 5000,
-    display: "6.7-inch FHD+ 120Hz Curved AMOLED",
-    displayGroup: "FHD+",
-    ram: "8GB",
-    storage: "256GB",
-    processor: "Snapdragon 7s Gen 2 (4nm)",
-    camera: "50MP Sony LYT-701 OIS + 50MP Sony LYT-600 3x Periscope OIS + 8MP Wide",
-    imageUrl: "📱",
-    source: "Flipkart",
-    sourceUrl: "https://www.flipkart.com/search?q=Realme+13+Pro+Plus",
-    details: `
-      <h4>Realme 13 Pro+ 5G Specifications</h4>
-      <p>AI Photography flagship featuring Monet-inspired glass back design and Sony LYT periscope telephoto lens.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹32,999 (Market Retail Rate)</li>
-        <li><strong>Battery:</strong> 5000 mAh (80W SUPERVOOC)</li>
-        <li><strong>Display:</strong> 6.7-inch Curved AMOLED, FHD+ (2412 x 1080 pixels), 120Hz, Pro-XDR.</li>
-        <li><strong>Processor:</strong> Snapdragon 7s Gen 2 (4nm)</li>
-        <li><strong>Storage / RAM:</strong> 8GB RAM / 256GB</li>
-        <li><strong>Camera:</strong> 50MP Sony LYT-701 OIS + 50MP Sony LYT-600 3x Periscope OIS + 8MP Wide</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> Dual Sony LYT sensors with 3x optical periscope zoom under ₹35k.
-      </div>
-    `
-  },
-  {
-    id: "realme_12_pro_plus",
-    name: "Realme 12 Pro+ 5G",
-    brand: "Realme",
-    price: 27999,
-    battery: 5000,
-    display: "6.7-inch FHD+ 120Hz Curved Vision AMOLED",
-    displayGroup: "FHD+",
-    ram: "8GB",
-    storage: "128GB",
-    processor: "Snapdragon 7s Gen 2 (4nm)",
-    camera: "64MP OV64B 3x Periscope OIS + 50MP Sony IMX890 OIS + 8MP Wide",
-    imageUrl: "📱",
-    source: "Amazon.in",
-    sourceUrl: "https://www.amazon.in/s?k=Realme+12+Pro+Plus",
-    details: `
-      <h4>Realme 12 Pro+ 5G Specifications</h4>
-      <p>Luxury watch design phone featuring flagship grade 64MP periscope telephoto camera sensor.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹27,999 (Best Live Price)</li>
-        <li><strong>Battery:</strong> 5000 mAh (67W SUPERVOOC)</li>
-        <li><strong>Display:</strong> 6.7-inch Curved AMOLED, FHD+ (2412 x 1080), 120Hz.</li>
-        <li><strong>Processor:</strong> Snapdragon 7s Gen 2 (4nm)</li>
-        <li><strong>Storage / RAM:</strong> 8GB RAM / 128GB</li>
-        <li><strong>Camera:</strong> 64MP 3x Periscope OIS + 50MP Sony IMX890 OIS + 8MP Wide</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> Periscope telephoto camera under ₹30,000.
-      </div>
-    `
-  },
 
   // --- GOOGLE PIXEL ---
   {
-    id: "google_pixel_8_pro",
-    name: "Google Pixel 8 Pro",
-    brand: "Google",
-    price: 98999,
-    battery: 5050,
-    display: "6.7-inch QHD+ 120Hz Super Actua LTPO OLED",
-    displayGroup: "2K",
-    ram: "12GB",
-    storage: "128GB",
-    processor: "Google Tensor G3 (4nm)",
-    camera: "50MP Main OIS + 48MP 5x Telephoto + 48MP UltraWide",
-    imageUrl: "📱",
-    source: "Flipkart",
-    sourceUrl: "https://www.flipkart.com/search?q=Google+Pixel+8+Pro",
-    details: `
-      <h4>Google Pixel 8 Pro Specifications</h4>
-      <p>Google's pro flagship with AI features, Super Actua display, temperature sensor, and 7 years of Android updates.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹98,999 (Current Market Retail)</li>
-        <li><strong>Battery:</strong> 5050 mAh (30W Wired, 23W Wireless Charging)</li>
-        <li><strong>Display:</strong> 6.7-inch LTPO OLED, QHD+ (2992 x 1344 pixels), 1-120Hz, 2400 nits.</li>
-        <li><strong>Processor:</strong> Google Tensor G3 + Titan M2 Security Chip</li>
-        <li><strong>Storage / RAM:</strong> 12GB RAM / 128GB</li>
-        <li><strong>Camera:</strong> 50MP Octa PD OIS + 48MP 5x Telephoto OIS + 48MP UltraWide with Macro</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> Unmatched computational photography and 7 years of OS support.
-      </div>
-    `
-  },
-  {
     id: "google_pixel_8a",
+    category: "Mobile",
     name: "Google Pixel 8a",
     brand: "Google",
     price: 41999,
@@ -668,264 +1083,11 @@ const productDatabase = [
         <strong>Market Data Note:</strong> Best computational camera under ₹45k with wireless charging.
       </div>
     `
-  },
-
-  // --- MOTOROLA ---
-  {
-    id: "moto_edge_50_pro",
-    name: "Motorola Edge 50 Pro 5G",
-    brand: "Motorola",
-    price: 31999,
-    battery: 4500,
-    display: "6.7-inch 1.5K 144Hz Curved pOLED (Pantone Validated)",
-    displayGroup: "1.5K",
-    ram: "8GB",
-    storage: "256GB",
-    processor: "Snapdragon 7 Gen 3 (4nm)",
-    camera: "50MP Main OIS + 10MP 3x Telephoto + 13MP UltraWide",
-    imageUrl: "📱",
-    source: "Flipkart",
-    sourceUrl: "https://www.flipkart.com/search?q=Motorola+Edge+50+Pro",
-    details: `
-      <h4>Motorola Edge 50 Pro 5G Specifications</h4>
-      <p>Vegan leather back smartphone with Pantone validated display/camera, IP68 water rating, and 125W TurboPower.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹31,999 (Market Price)</li>
-        <li><strong>Battery:</strong> 4500 mAh (125W TurboPower + 50W Wireless Charging)</li>
-        <li><strong>Display:</strong> 6.7-inch Curved pOLED, 1.5K (2712 x 1220 pixels), 144Hz refresh rate, 2000 nits.</li>
-        <li><strong>Processor:</strong> Snapdragon 7 Gen 3 (4nm)</li>
-        <li><strong>Storage / RAM:</strong> 8GB RAM / 256GB Storage</li>
-        <li><strong>Camera:</strong> 50MP Main OIS (f/1.4) + 10MP 3x Telephoto + 13MP UltraWide</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> 125W wired + 50W wireless charging with 3x optical telephoto lens.
-      </div>
-    `
-  },
-  {
-    id: "moto_edge_50_fusion",
-    name: "Motorola Edge 50 Fusion 5G",
-    brand: "Motorola",
-    price: 22999,
-    battery: 5000,
-    display: "6.7-inch FHD+ 144Hz Curved pOLED",
-    displayGroup: "FHD+",
-    ram: "8GB",
-    storage: "128GB",
-    processor: "Snapdragon 7s Gen 2 (4nm)",
-    camera: "50MP Sony LYT-700C OIS + 13MP UltraWide",
-    imageUrl: "📱",
-    source: "Flipkart",
-    sourceUrl: "https://www.flipkart.com/search?q=Motorola+Edge+50+Fusion",
-    details: `
-      <h4>Motorola Edge 50 Fusion 5G Specifications</h4>
-      <p>Sleek curved pOLED screen phone with IP68 underwater protection and Sony LYT main camera.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹22,999 (Best Live Price)</li>
-        <li><strong>Battery:</strong> 5000 mAh (68W TurboPower)</li>
-        <li><strong>Display:</strong> 6.7-inch Curved pOLED, FHD+ (2400 x 1080), 144Hz, 1600 nits.</li>
-        <li><strong>Processor:</strong> Snapdragon 7s Gen 2 (4nm)</li>
-        <li><strong>Storage / RAM:</strong> 8GB RAM / 128GB</li>
-        <li><strong>Camera:</strong> 50MP Sony LYT-700C OIS + 13MP UltraWide Macro</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> IP68 water protection and 144Hz curved screen under ₹25,000.
-      </div>
-    `
-  },
-  {
-    id: "moto_g85",
-    name: "Motorola Moto G85 5G",
-    brand: "Motorola",
-    price: 17999,
-    battery: 5000,
-    display: "6.67-inch FHD+ 120Hz 3D Curved pOLED",
-    displayGroup: "FHD+",
-    ram: "8GB",
-    storage: "128GB",
-    processor: "Snapdragon 6s Gen 3 (6nm)",
-    camera: "50MP Sony LYT-600 OIS + 8MP UltraWide",
-    imageUrl: "📱",
-    source: "Flipkart",
-    sourceUrl: "https://www.flipkart.com/search?q=Moto+G85+5G",
-    details: `
-      <h4>Motorola Moto G85 5G Specifications</h4>
-      <p>First G-series phone featuring 3D curved pOLED display and Sony LYT OIS camera sensor.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹17,999 (Current Retail)</li>
-        <li><strong>Battery:</strong> 5000 mAh (30W TurboPower)</li>
-        <li><strong>Display:</strong> 6.67-inch 3D Curved pOLED, FHD+ (2400 x 1080), 120Hz, 1600 nits.</li>
-        <li><strong>Processor:</strong> Snapdragon 6s Gen 3</li>
-        <li><strong>Storage / RAM:</strong> 8GB RAM / 128GB</li>
-        <li><strong>Camera:</strong> 50MP Sony LYT-600 OIS + 8MP UltraWide</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> Most affordable curved pOLED phone in market under ₹18k.
-      </div>
-    `
-  },
-
-  // --- NOTHING ---
-  {
-    id: "nothing_phone_2a",
-    name: "Nothing Phone (2a) 5G",
-    brand: "Nothing",
-    price: 23999,
-    battery: 5000,
-    display: "6.7-inch Flexible AMOLED 120Hz (Glyph Interface)",
-    displayGroup: "FHD+",
-    ram: "8GB",
-    storage: "128GB",
-    processor: "MediaTek Dimensity 7200 Pro (4nm)",
-    camera: "50MP Main OIS + 50MP UltraWide",
-    imageUrl: "📱",
-    source: "Flipkart",
-    sourceUrl: "https://www.flipkart.com/search?q=Nothing+Phone+2a",
-    details: `
-      <h4>Nothing Phone (2a) 5G Specifications</h4>
-      <p>Iconic transparent back design with Glyph light interface, dual 50MP cameras, and Nothing OS 2.6.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹23,999 (Current Live Retail)</li>
-        <li><strong>Battery:</strong> 5000 mAh (45W Fast Charge)</li>
-        <li><strong>Display:</strong> 6.7-inch Flexible AMOLED, FHD+ (2412 x 1080 pixels), 120Hz, 1300 nits.</li>
-        <li><strong>Processor:</strong> MediaTek Dimensity 7200 Pro (4nm)</li>
-        <li><strong>Storage / RAM:</strong> 8GB RAM / 128GB</li>
-        <li><strong>Camera:</strong> 50MP Main OIS + 50MP UltraWide</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> Dual 50MP camera setup and clean ad-free Nothing OS under ₹25k.
-      </div>
-    `
-  },
-
-  // --- IQOO ---
-  {
-    id: "iqoo_12",
-    name: "iQOO 12 5G",
-    brand: "IQOO",
-    price: 52999,
-    battery: 5000,
-    display: "6.78-inch 1.5K 144Hz LTPO AMOLED",
-    displayGroup: "1.5K",
-    ram: "12GB",
-    storage: "256GB",
-    processor: "Snapdragon 8 Gen 3 (4nm)",
-    camera: "50MP OIS + 64MP 3x Periscope OIS + 50MP Wide",
-    imageUrl: "📱",
-    source: "Amazon.in",
-    sourceUrl: "https://www.amazon.in/s?k=iQOO+12",
-    details: `
-      <h4>iQOO 12 5G Specifications</h4>
-      <p>Extreme gaming flagship with Snapdragon 8 Gen 3, dedicated Q1 gaming chip, and 64MP periscope telephoto camera.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹52,999 (Current Live Retail)</li>
-        <li><strong>Battery:</strong> 5000 mAh (120W FlashCharge - 100% in 27 mins)</li>
-        <li><strong>Display:</strong> 6.78-inch 144Hz LTPO AMOLED, 1.5K (2800 x 1260), 3000 nits.</li>
-        <li><strong>Processor:</strong> Snapdragon 8 Gen 3 + Supercomputing Chip Q1</li>
-        <li><strong>Storage / RAM:</strong> 12GB RAM / 256GB UFS 4.0</li>
-        <li><strong>Camera:</strong> 50MP Main OIS + 64MP 3x Periscope OIS + 50MP UltraWide</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> Highest performance benchmark score phone under ₹55,000.
-      </div>
-    `
-  },
-  {
-    id: "iqoo_neo_9_pro",
-    name: "iQOO Neo 9 Pro 5G",
-    brand: "IQOO",
-    price: 34999,
-    battery: 5160,
-    display: "6.78-inch 1.5K 144Hz LTPO AMOLED",
-    displayGroup: "1.5K",
-    ram: "8GB",
-    storage: "128GB",
-    processor: "Snapdragon 8 Gen 2 (4nm)",
-    camera: "50MP Sony IMX920 OIS + 8MP UltraWide",
-    imageUrl: "📱",
-    source: "Amazon.in",
-    sourceUrl: "https://www.amazon.in/s?k=iQOO+Neo+9+Pro",
-    details: `
-      <h4>iQOO Neo 9 Pro 5G Specifications</h4>
-      <p>Performance killer with Snapdragon 8 Gen 2, 120W FlashCharge, and flagship Sony IMX920 sensor.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹34,999 (Market Price)</li>
-        <li><strong>Battery:</strong> 5160 mAh (120W FlashCharge)</li>
-        <li><strong>Display:</strong> 6.78-inch 144Hz LTPO AMOLED, 1.5K (2800 x 1260), 1400 nits.</li>
-        <li><strong>Processor:</strong> Snapdragon 8 Gen 2 (4nm) + Q1 Supercomputing Chip</li>
-        <li><strong>Storage / RAM:</strong> 8GB RAM / 128GB UFS 4.0</li>
-        <li><strong>Camera:</strong> 50MP Sony IMX920 OIS + 8MP UltraWide</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> Snapdragon 8 series flagship performance under ₹35k.
-      </div>
-    `
-  },
-  {
-    id: "iqoo_z9x",
-    name: "iQOO Z9x 5G",
-    brand: "IQOO",
-    price: 12999,
-    battery: 6000,
-    display: "6.72-inch FHD+ 120Hz LCD (1000 nits)",
-    displayGroup: "FHD+",
-    ram: "4GB",
-    storage: "128GB",
-    processor: "Snapdragon 6 Gen 1 (4nm)",
-    camera: "50MP Main + 2MP Depth",
-    imageUrl: "📱",
-    source: "Amazon.in",
-    sourceUrl: "https://www.amazon.in/s?k=iQOO+Z9x+5G",
-    details: `
-      <h4>iQOO Z9x 5G Specifications</h4>
-      <p>Budget battery monster with 6000mAh capacity, Snapdragon 4nm chip, and 44W fast charging.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹12,999 (Standard Pricing)</li>
-        <li><strong>Battery:</strong> 6000 mAh (44W FlashCharge support)</li>
-        <li><strong>Display:</strong> 6.72-inch IPS LCD, FHD+ (1080 x 2408 pixels), 120Hz, 1000 nits.</li>
-        <li><strong>Processor:</strong> Snapdragon 6 Gen 1 (4nm)</li>
-        <li><strong>Storage / RAM:</strong> 4GB RAM / 128GB</li>
-        <li><strong>Camera:</strong> 50MP Main + 2MP Depth</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> Verified 6000mAh capacity under ₹13,000.
-      </div>
-    `
-  },
-
-  // --- XIAOMI / POCO ---
-  {
-    id: "poco_x6_pro",
-    name: "Poco X6 Pro 5G",
-    brand: "Poco",
-    price: 23999,
-    battery: 5000,
-    display: "6.67-inch 1.5K 120Hz Flow AMOLED",
-    displayGroup: "1.5K",
-    ram: "8GB",
-    storage: "256GB",
-    processor: "MediaTek Dimensity 8300-Ultra (4nm)",
-    camera: "64MP OIS + 8MP UltraWide + 2MP Macro",
-    imageUrl: "📱",
-    source: "Flipkart",
-    sourceUrl: "https://www.flipkart.com/search?q=Poco+X6+Pro",
-    details: `
-      <h4>Poco X6 Pro 5G Specifications</h4>
-      <p>Budget performance king with Dimensity 8300-Ultra chip, 1.5K AMOLED screen, and HyperOS.</p>
-      <ul>
-        <li><strong>Price:</strong> ₹23,999 (Current Market Retail)</li>
-        <li><strong>Battery:</strong> 5000 mAh (67W Turbo Charge)</li>
-        <li><strong>Display:</strong> 6.67-inch Flow AMOLED, 1.5K (2712 x 1220 pixels), 120Hz, 1800 nits.</li>
-        <li><strong>Processor:</strong> MediaTek Dimensity 8300-Ultra (4nm)</li>
-        <li><strong>Storage / RAM:</strong> 8GB RAM / 256GB UFS 4.0</li>
-        <li><strong>Camera:</strong> 64MP OIS + 8MP UltraWide + 2MP Macro</li>
-      </ul>
-      <div class="drawer-highlight-block success-border">
-        <strong>Market Data Note:</strong> Best performance-to-price ratio in ₹20k-25k budget segment.
-      </div>
-    `
   }
 ];
+
+// Combine both datasets for unified quick lookup
+const allProductsDatabase = [...laptopDatabase, ...mobileDatabase];
 
 // ==========================================================================
 // STATE CONTROLLER
@@ -935,23 +1097,16 @@ class AuraCompareApp {
     this.activeTab = "product-compare";
     this.currentUser = null;
     this.history = [];
-    
-    // Load API Key from storage if user provided one
-    this.geminiApiKey = localStorage.getItem("gemini_api_key") || "";
+    this.geminiApiKey = localStorage.getItem("gemini_api_key") || "AQ.Ab8RN6Kw5eO22vz5tSH7nsskveQ2ySf3VkCCmt6aMKDoRyirtg";
 
-    // Initialize state & DOM bindings
     this.checkAuthentication();
     this.loadHistory();
     this.initDOM();
   }
 
-  // =====================================================================
-  // GEMINI AI ENGINE (Clean Error Handling & Graceful Fallbacks)
-  // =====================================================================
+  // GEMINI AI CALL
   async callGeminiAPI(prompt, systemInstruction = "", jsonMode = false, useGoogleSearch = false, retries = 1) {
-    // Only attempt Gemini call if user configured a valid API key starting with AIzaSy
     if (!this.geminiApiKey || typeof this.geminiApiKey !== "string" || !this.geminiApiKey.startsWith("AIzaSy")) {
-      console.log("No custom valid Gemini API key set. Using live product market engine.");
       return null;
     }
 
@@ -960,22 +1115,11 @@ class AuraCompareApp {
 
     for (const model of modelsToTry) {
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${this.geminiApiKey}`;
+      const requestBody = { contents: [{ parts: [{ text: prompt }] }] };
 
-      const requestBody = {
-        contents: [{ parts: [{ text: prompt }] }]
-      };
-
-      if (systemInstruction) {
-        requestBody.systemInstruction = { parts: [{ text: systemInstruction }] };
-      }
-
-      if (jsonMode) {
-        requestBody.generationConfig = { responseMimeType: "application/json" };
-      }
-
-      if (useGoogleSearch) {
-        requestBody.tools = [{ googleSearch: {} }];
-      }
+      if (systemInstruction) requestBody.systemInstruction = { parts: [{ text: systemInstruction }] };
+      if (jsonMode) requestBody.generationConfig = { responseMimeType: "application/json" };
+      if (useGoogleSearch) requestBody.tools = [{ googleSearch: {} }];
 
       try {
         const response = await fetch(endpoint, {
@@ -997,21 +1141,16 @@ class AuraCompareApp {
         const data = await response.json();
         const parts = data.candidates?.[0]?.content?.parts || [];
         const responseText = parts.map(p => p.text || "").join("").trim();
-
         if (responseText) return responseText;
       } catch (err) {
         lastError = err;
       }
     }
-
-    if (lastError) console.warn("Gemini API call notice:", lastError.message);
     return null;
   }
 
-  // =====================================================================
-  // PUBLIC PRODUCT API INTEGRATION (Auxiliary Live Market Retrieval)
-  // =====================================================================
-  async fetchFromPublicProductAPI(query) {
+  // PUBLIC PRODUCT API FALLBACK
+  async fetchFromPublicProductAPI(query, category) {
     try {
       const res = await fetch(`https://dummyjson.com/products/search?q=${encodeURIComponent(query)}`);
       if (!res.ok) return null;
@@ -1019,17 +1158,18 @@ class AuraCompareApp {
       if (Array.isArray(data.products) && data.products.length > 0) {
         return data.products.map((p, idx) => ({
           id: `public_api_${p.id}_${Date.now()}`,
+          category: category,
           name: p.title,
-          brand: p.brand || "Market Device",
-          price: Math.round(p.price * 83), // USD to INR conversion
-          battery: p.category === 'smartphones' ? 5000 : 4500,
-          display: "FHD+ 120Hz AMOLED Display",
+          brand: p.brand || "Market Model",
+          price: Math.round(p.price * 83),
+          battery: category === "Laptop" ? "10 Hours Battery" : (p.category === 'smartphones' ? 5000 : 4500),
+          display: category === "Laptop" ? "15.6-inch FHD Display" : "FHD+ 120Hz Display",
           displayGroup: "FHD+",
-          ram: "8GB",
-          storage: "128GB",
-          processor: "Octa-Core Chipset",
-          camera: "50MP Main Camera",
-          imageUrl: "📱",
+          ram: category === "Laptop" ? "16GB RAM" : "8GB RAM",
+          storage: category === "Laptop" ? "512GB SSD" : "128GB Storage",
+          processor: category === "Laptop" ? "Intel / AMD Processor" : "Octa-Core Chipset",
+          camera: category === "Laptop" ? "HD Webcam" : "50MP Main Camera",
+          imageUrl: category === "Laptop" ? "💻" : "📱",
           source: "Global Market API",
           sourceUrl: `https://dummyjson.com/products/${p.id}`,
           isLive: true,
@@ -1039,8 +1179,7 @@ class AuraCompareApp {
             <ul>
               <li><strong>Price:</strong> ₹${Math.round(p.price * 83).toLocaleString()}</li>
               <li><strong>Rating:</strong> ⭐ ${p.rating || 4.5} / 5</li>
-              <li><strong>Stock:</strong> ${p.stock || 'In Stock'}</li>
-              <li><strong>Category:</strong> ${p.category}</li>
+              <li><strong>Category:</strong> ${category}</li>
             </ul>
           `
         }));
@@ -1075,7 +1214,6 @@ class AuraCompareApp {
 
     if (nameEl) nameEl.textContent = this.currentUser.name;
     if (emailEl) emailEl.textContent = this.currentUser.email;
-    
     if (avatarEl) {
       if (this.currentUser.picture) {
         avatarEl.innerHTML = `<img src="${this.currentUser.picture}" alt="${this.currentUser.name}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
@@ -1093,19 +1231,19 @@ class AuraCompareApp {
       this.history = [
         {
           id: "hist_1",
-          query: "Samsung phone under 30000 with 6000mAh battery",
-          filters: { price: 30000, battery: 6000, brand: "Samsung", display: "" },
-          matchesCount: 2,
-          date: "Aug 14, 2026, 09:00 AM",
-          avgPrice: "₹22,499"
+          query: "Gaming laptop under 60000 with RTX 3050 and 16GB RAM",
+          filters: { category: "Laptop", price: 60000, brand: "ASUS", ram: "16GB", gpu: "RTX 3050" },
+          matchesCount: 3,
+          date: "Aug 14, 2026, 09:30 AM",
+          avgPrice: "₹56,490"
         },
         {
           id: "hist_2",
-          query: "iPhone under 70000 with OLED display",
-          filters: { price: 70000, battery: 0, brand: "Apple", display: "OLED" },
+          query: "MacBook Air M2 under 90000",
+          filters: { category: "Laptop", price: 90000, brand: "Apple", processor: "M2" },
           matchesCount: 2,
-          date: "Aug 14, 2026, 09:05 AM",
-          avgPrice: "₹61,400"
+          date: "Aug 14, 2026, 09:35 AM",
+          avgPrice: "₹79,900"
         }
       ];
       localStorage.setItem("auracompare_history", JSON.stringify(this.history));
@@ -1114,11 +1252,9 @@ class AuraCompareApp {
   }
 
   initDOM() {
-    // API KEY INPUT BINDING
     const apiKeyInput = document.getElementById("gemini-api-key");
     if (apiKeyInput) {
       apiKeyInput.value = this.geminiApiKey;
-      
       const updateStatusBadge = (key) => {
         const label = document.querySelector(".connection-label");
         if (label) {
@@ -1131,7 +1267,6 @@ class AuraCompareApp {
           }
         }
       };
-      
       updateStatusBadge(this.geminiApiKey);
 
       apiKeyInput.addEventListener("input", (e) => {
@@ -1141,7 +1276,6 @@ class AuraCompareApp {
       });
     }
 
-    // AUTH LISTENERS
     const btnGoogleLogin = document.getElementById("btn-google-login");
     const oauthModal = document.getElementById("oauth-modal");
     const btnLogout = document.getElementById("btn-logout");
@@ -1177,7 +1311,6 @@ class AuraCompareApp {
       });
     }
 
-    // Manual Sign In / Sign Up toggles
     const tabSignIn = document.getElementById("tab-toggle-signin");
     const tabSignUp = document.getElementById("tab-toggle-signup");
     const groupName = document.getElementById("group-signup-name");
@@ -1231,7 +1364,6 @@ class AuraCompareApp {
         }
 
         const initials = name.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase();
-
         const userProfile = {
           name: name,
           email: email,
@@ -1241,7 +1373,6 @@ class AuraCompareApp {
 
         localStorage.setItem("auracompare_auth", JSON.stringify(userProfile));
         this.currentUser = userProfile;
-        
         this.showToast(isSignUp ? "Account registered successfully!" : "Logged in successfully.", "success");
         this.checkAuthentication();
       });
@@ -1258,7 +1389,6 @@ class AuraCompareApp {
       });
     }
 
-    // NAVIGATION TABS
     document.querySelectorAll(".nav-item").forEach(item => {
       item.addEventListener("click", (e) => {
         const tab = e.currentTarget.getAttribute("data-tab");
@@ -1266,7 +1396,6 @@ class AuraCompareApp {
       });
     });
 
-    // Run Comparison Trigger
     const btnCompare = document.getElementById("btn-run-compare");
     const inputSearch = document.getElementById("nl-search-input");
     
@@ -1277,7 +1406,6 @@ class AuraCompareApp {
       });
     }
 
-    // Suggestion pills
     document.querySelectorAll(".suggestion-tag").forEach(tag => {
       tag.addEventListener("click", (e) => {
         const query = e.currentTarget.getAttribute("data-query");
@@ -1286,7 +1414,6 @@ class AuraCompareApp {
       });
     });
 
-    // Drawer closing bindings
     const btnCloseDrawer = document.getElementById("drawer-close-btn");
     const overlayDrawer = document.getElementById("drawer-overlay");
     if (btnCloseDrawer) btnCloseDrawer.addEventListener("click", () => this.closeDrawer());
@@ -1307,22 +1434,18 @@ class AuraCompareApp {
 
       localStorage.setItem("auracompare_auth", JSON.stringify(user));
       this.currentUser = user;
-      
       if (loader) loader.classList.add("hidden");
       document.getElementById("oauth-modal").classList.add("hidden");
-      this.showToast(`Welcome, ${name}. Secure session saved.`, "success");
+      this.showToast(`Welcome, ${name}.`, "success");
       this.checkAuthentication();
-    }, 1200);
+    }, 1000);
   }
 
   switchTab(tabId) {
     this.activeTab = tabId;
     document.querySelectorAll(".nav-item").forEach(item => {
-      if (item.getAttribute("data-tab") === tabId) {
-        item.classList.add("active");
-      } else {
-        item.classList.remove("active");
-      }
+      if (item.getAttribute("data-tab") === tabId) item.classList.add("active");
+      else item.classList.remove("active");
     });
 
     const titleEl = document.getElementById("page-title");
@@ -1331,7 +1454,7 @@ class AuraCompareApp {
     if (titleEl && descEl) {
       if (tabId === "product-compare") {
         titleEl.textContent = "Live Product Search & Comparison";
-        descEl.textContent = "Describe target specs to retrieve and rank live products across marketplaces";
+        descEl.textContent = "Search Laptops or Mobile Phones to compare market specs and prices";
       } else if (tabId === "saved-searches") {
         titleEl.textContent = "Saved Query Snapshots";
         descEl.textContent = "Review past query configurations and look up cached price points";
@@ -1391,9 +1514,8 @@ class AuraCompareApp {
     }, 4000);
   }
 
-  // Ensure buy button routes to reliable online store query
   getValidBuyUrl(prod) {
-    const rawName = prod.name || `${prod.brand || ""} smartphone`;
+    const rawName = prod.name || `${prod.brand || ""} device`;
     const cleanName = rawName.replace(/[^\w\s\+\-]/gi, " ").replace(/\s+/g, " ").trim();
     const source = (prod.source || "").toLowerCase();
 
@@ -1405,16 +1527,22 @@ class AuraCompareApp {
       return `https://www.google.com/search?q=${encodeURIComponent("site:apple.com/in " + cleanName)}`;
     } else if (source.includes("samsung")) {
       return `https://www.google.com/search?q=${encodeURIComponent("site:samsung.com/in " + cleanName)}`;
+    } else if (source.includes("hp")) {
+      return `https://www.google.com/search?q=${encodeURIComponent("site:hp.com/in " + cleanName)}`;
+    } else if (source.includes("lenovo")) {
+      return `https://www.google.com/search?q=${encodeURIComponent("site:lenovo.com/in " + cleanName)}`;
+    } else if (source.includes("dell")) {
+      return `https://www.google.com/search?q=${encodeURIComponent("site:dell.com/en-in " + cleanName)}`;
     }
     
     return `https://www.google.com/search?q=${encodeURIComponent("buy " + cleanName + " online india")}`;
   }
 
-  // DRAWER HANDLERS
   openDrawer(productId) {
-    const prod = productDatabase.find(p => p.id === productId);
+    const prod = allProductsDatabase.find(p => p.id === productId);
     if (!prod) return;
 
+    document.getElementById("drawer-doc-type").textContent = (prod.category || "DEVICE").toUpperCase();
     document.getElementById("drawer-doc-title").textContent = prod.name;
     document.getElementById("drawer-doc-brand").textContent = prod.brand;
     document.getElementById("drawer-doc-price").textContent = `₹${prod.price.toLocaleString()}`;
@@ -1435,6 +1563,7 @@ class AuraCompareApp {
   }
 
   openDrawerWithContent(prod) {
+    document.getElementById("drawer-doc-type").textContent = (prod.category || "DEVICE").toUpperCase();
     document.getElementById("drawer-doc-title").textContent = prod.name;
     document.getElementById("drawer-doc-brand").textContent = prod.brand;
     document.getElementById("drawer-doc-price").textContent = `₹${prod.price.toLocaleString()}`;
@@ -1446,32 +1575,28 @@ class AuraCompareApp {
     urlLink.rel = "noopener noreferrer";
     urlLink.textContent = `Buy on ${prod.source || "Amazon.in"}`;
 
-    document.getElementById("drawer-doc-content").innerHTML = prod.details || `<p>No detailed spec sheet available for this result.</p>`;
+    document.getElementById("drawer-doc-content").innerHTML = prod.details || `<p>No detailed spec sheet available.</p>`;
     document.getElementById("document-drawer").classList.add("open");
   }
 
-  // ==========================================================================
-  // RETRIEVAL & SEARCH PIPELINE
-  // ==========================================================================
+  // SEARCH RETRIEVAL PIPELINE
   async runProductSearch() {
     const input = document.getElementById("nl-search-input");
     const query = input.value.trim();
 
     if (!query) {
-      this.showToast("Please enter a product or specification query", "warning");
+      this.showToast("Please enter a query (e.g. laptop or mobile specs)", "warning");
       return;
     }
 
-    this.showToast("Searching live market API & spec index...", "info");
+    this.showToast("Searching market API & specs database...", "info");
 
-    // Hide empty state & results, show pipeline monitor
     document.getElementById("compare-empty-view").classList.add("hidden");
     document.getElementById("search-results-container").classList.add("hidden");
     
     const monitor = document.getElementById("pipeline-monitor");
     monitor.classList.remove("hidden");
 
-    // Reset pipeline step displays
     const steps = ["step-parser", "step-crawlers", "step-ranking"];
     steps.forEach(id => {
       const step = document.getElementById(id);
@@ -1482,10 +1607,9 @@ class AuraCompareApp {
 
     document.getElementById("parsed-chips-container").classList.add("hidden");
     document.getElementById("parsed-chips-container").innerHTML = "";
-    document.getElementById("parser-status").textContent = "Parsing query constraints...";
+    document.getElementById("parser-status").textContent = "Analyzing query category & spec bounds...";
     document.getElementById("ranking-status").textContent = "Awaiting matched candidates...";
 
-    // Reset crawl progress bars
     const crawlers = ["amazon", "flipkart", "samsung"];
     crawlers.forEach(c => {
       document.getElementById(`crawl-fill-${c}`).style.width = "0%";
@@ -1493,7 +1617,6 @@ class AuraCompareApp {
       document.getElementById(`crawl-time-${c}`).closest(".crawler-bar-row").classList.remove("completed");
     });
 
-    // Start timer display
     const timerBadge = document.getElementById("pipeline-timer");
     let startTime = Date.now();
     let timerInterval = setInterval(() => {
@@ -1512,27 +1635,27 @@ class AuraCompareApp {
 
     stepParser.classList.remove("active-step");
     stepParser.querySelector(".step-icon-indicator").className = "step-icon-indicator completed";
-    document.getElementById("parser-status").textContent = "Query parsed & target parameters extracted.";
+    document.getElementById("parser-status").textContent = `Category detected: ${parsedFilters.category}. Target parameters extracted.`;
     
     const chipsContainer = document.getElementById("parsed-chips-container");
     chipsContainer.classList.remove("hidden");
-    chipsContainer.innerHTML = "";
+    chipsContainer.innerHTML = `<span class="filter-chip" style="background:var(--accent-primary);color:#fff;">Category: ${parsedFilters.category}</span>`;
     if (parsedFilters.brand) chipsContainer.innerHTML += `<span class="filter-chip">Brand: ${parsedFilters.brand}</span>`;
     if (parsedFilters.price) chipsContainer.innerHTML += `<span class="filter-chip">Price <= ₹${parsedFilters.price.toLocaleString()}</span>`;
-    if (parsedFilters.battery) chipsContainer.innerHTML += `<span class="filter-chip">Battery >= ${parsedFilters.battery}mAh</span>`;
-    if (parsedFilters.display) chipsContainer.innerHTML += `<span class="filter-chip">Display: ${parsedFilters.display}</span>`;
     if (parsedFilters.ram) chipsContainer.innerHTML += `<span class="filter-chip">RAM: ${parsedFilters.ram}</span>`;
-    chipsContainer.innerHTML += `<span class="filter-chip">Category: Mobile</span>`;
+    if (parsedFilters.gpu) chipsContainer.innerHTML += `<span class="filter-chip">GPU: ${parsedFilters.gpu}</span>`;
+    if (parsedFilters.processor) chipsContainer.innerHTML += `<span class="filter-chip">CPU: ${parsedFilters.processor}</span>`;
+    if (parsedFilters.battery && parsedFilters.category === "Mobile") chipsContainer.innerHTML += `<span class="filter-chip">Battery >= ${parsedFilters.battery}mAh</span>`;
+    if (parsedFilters.display) chipsContainer.innerHTML += `<span class="filter-chip">Display: ${parsedFilters.display}</span>`;
 
     // STEP 2: PARALLEL API / INDEX FETCH
     const stepCrawlers = document.getElementById("step-crawlers");
     stepCrawlers.classList.add("active-step");
     stepCrawlers.querySelector(".step-icon-indicator").className = "step-icon-indicator active";
 
-    // Attempt Gemini or Public API fetch
     let liveProducts = null;
     if (this.geminiApiKey && this.geminiApiKey.startsWith("AIzaSy")) {
-      const prompt = `Find smartphones matching "${query}". Return raw JSON array of 5 products: [{"name":"","brand":"","price":10000,"battery":5000,"display":"","ram":"","storage":"","processor":"","camera":"","source":""}]`;
+      const prompt = `Search ${parsedFilters.category} matching "${query}". Return raw JSON array of 5 products: [{"name":"","brand":"","price":50000,"ram":"","storage":"","processor":"","camera":"","source":""}]`;
       const geminiRes = await this.callGeminiAPI(prompt, "", true);
       if (geminiRes) {
         try {
@@ -1541,21 +1664,22 @@ class AuraCompareApp {
           if (Array.isArray(arr) && arr.length > 0) {
             liveProducts = arr.map((p, idx) => ({
               id: `gemini_live_${idx}_${Date.now()}`,
+              category: parsedFilters.category,
               name: p.name || "Live Market Model",
               brand: p.brand || "Brand",
-              price: typeof p.price === "number" ? p.price : parseInt(String(p.price).replace(/[^0-9]/g, "")) || 29999,
-              battery: typeof p.battery === "number" ? p.battery : parseInt(p.battery) || 5000,
-              display: p.display || "FHD+ 120Hz Display",
+              price: typeof p.price === "number" ? p.price : parseInt(String(p.price).replace(/[^0-9]/g, "")) || 49999,
+              battery: parsedFilters.category === "Laptop" ? "10 Hours Battery" : (p.battery ? `${p.battery} mAh` : "5000 mAh"),
+              display: p.display || "FHD Display",
               displayGroup: "FHD+",
-              ram: p.ram || "8GB",
-              storage: p.storage || "128GB",
-              processor: p.processor || "Octa-Core",
-              camera: p.camera || "50MP Main",
-              imageUrl: "📱",
+              ram: p.ram || "16GB",
+              storage: p.storage || "512GB",
+              processor: p.processor || "Processor",
+              camera: p.camera || "HD Camera",
+              imageUrl: parsedFilters.category === "Laptop" ? "💻" : "📱",
               source: p.source || "Live Search",
               sourceUrl: "",
               isLive: true,
-              details: `<h4>${p.name}</h4><p>Retrieved from live Gemini API grounding.</p><ul><li><strong>Price:</strong> ₹${(p.price || 0).toLocaleString()}</li><li><strong>Battery:</strong> ${p.battery} mAh</li><li><strong>Display:</strong> ${p.display}</li></ul>`
+              details: `<h4>${p.name}</h4><p>Retrieved from live Gemini API grounding.</p><ul><li><strong>Price:</strong> ₹${(p.price || 0).toLocaleString()}</li><li><strong>RAM / Storage:</strong> ${p.ram} / ${p.storage}</li><li><strong>Processor:</strong> ${p.processor}</li></ul>`
             }));
           }
         } catch (e) {
@@ -1565,7 +1689,7 @@ class AuraCompareApp {
     }
 
     if (!liveProducts) {
-      liveProducts = await this.fetchFromPublicProductAPI(query);
+      liveProducts = await this.fetchFromPublicProductAPI(query, parsedFilters.category);
     }
 
     await Promise.all([
@@ -1592,11 +1716,11 @@ class AuraCompareApp {
     stepCrawlers.classList.remove("active-step");
     stepCrawlers.querySelector(".step-icon-indicator").className = "step-icon-indicator completed";
 
-    // STEP 3: RE-RANKING & SELECTION
+    // STEP 3: RE-RANKING
     const stepRanking = document.getElementById("step-ranking");
     stepRanking.classList.add("active-step");
     stepRanking.querySelector(".step-icon-indicator").className = "step-icon-indicator active";
-    document.getElementById("ranking-status").textContent = "Re-ranking devices against market specs...";
+    document.getElementById("ranking-status").textContent = `Re-ranking ${parsedFilters.category} candidates against market specs...`;
 
     let rankedResults;
     if (liveProducts && liveProducts.length > 0) {
@@ -1609,49 +1733,70 @@ class AuraCompareApp {
 
     stepRanking.classList.remove("active-step");
     stepRanking.querySelector(".step-icon-indicator").className = "step-icon-indicator completed";
-    document.getElementById("ranking-status").textContent = `Ranked ${rankedResults.length} market devices successfully.`;
+    document.getElementById("ranking-status").textContent = `Ranked ${rankedResults.length} ${parsedFilters.category.toLowerCase()}s successfully.`;
 
     clearInterval(timerInterval);
 
-    // Hide monitor, show results container
     monitor.classList.add("hidden");
     document.getElementById("search-results-container").classList.remove("hidden");
 
-    // Render output
     this.renderComparisonResult(query, parsedFilters, rankedResults);
-    
-    // Log search to history
     this.saveQueryToHistory(query, parsedFilters, rankedResults.length);
 
-    this.showToast("Product comparison complete.", "success");
+    this.showToast(`${parsedFilters.category} comparison complete.`, "success");
   }
 
-  // QUERY PARSER
+  // QUERY PARSER FOR LAPTOPS & PHONES
   parseQueryConstraints(queryText) {
     const text = queryText.replace(/(\d+),(\d+)/g, '$1$2').toLowerCase();
     const filters = {
+      category: "Mobile",
       price: null,
       battery: null,
       brand: null,
       display: null,
-      ram: null
+      ram: null,
+      processor: null,
+      gpu: null
     };
 
-    // Extract brand
-    if (text.includes("iphone") || text.includes("apple")) filters.brand = "Apple";
-    else if (text.includes("samsung")) filters.brand = "Samsung";
-    else if (text.includes("oneplus")) filters.brand = "OnePlus";
-    else if (text.includes("realme")) filters.brand = "Realme";
-    else if (text.includes("vivo")) filters.brand = "Vivo";
-    else if (text.includes("oppo")) filters.brand = "Oppo";
-    else if (text.includes("xiaomi") || text.includes("redmi") || text.includes("mi ")) filters.brand = "Xiaomi";
-    else if (text.includes("poco")) filters.brand = "Poco";
-    else if (text.includes("motorola") || text.includes("moto")) filters.brand = "Motorola";
-    else if (text.includes("iqoo")) filters.brand = "IQOO";
-    else if (text.includes("pixel") || text.includes("google")) filters.brand = "Google";
-    else if (text.includes("nothing") || text.includes("cmf")) filters.brand = "Nothing";
+    const laptopKeywords = [
+      "laptop", "laptops", "macbook", "notebook", "pc", "computer", "gaming laptop",
+      "intel", "ryzen", "rtx", "gtx", "core i3", "core i5", "core i7", "core i9",
+      "core ultra", "tuf", "rog", "victus", "loq", "ideapad", "vivobook", "nitro",
+      "predator", "thinkpad", "zenbook", "aspire", "alienware", "legion", "galaxy book",
+      "ssd", "graphics", "nvidia", "radeon"
+    ];
 
-    // Extract price cap
+    if (laptopKeywords.some(kw => text.includes(kw))) {
+      filters.category = "Laptop";
+    }
+
+    if (filters.category === "Laptop") {
+      if (text.includes("macbook") || text.includes("apple")) filters.brand = "Apple";
+      else if (text.includes("asus") || text.includes("tuf") || text.includes("rog") || text.includes("vivobook") || text.includes("zenbook")) filters.brand = "ASUS";
+      else if (text.includes("hp") || text.includes("victus") || text.includes("pavilion") || text.includes("omen")) filters.brand = "HP";
+      else if (text.includes("lenovo") || text.includes("loq") || text.includes("legion") || text.includes("ideapad") || text.includes("thinkpad") || text.includes("yoga")) filters.brand = "Lenovo";
+      else if (text.includes("dell") || text.includes("alienware") || text.includes("inspiron") || text.includes("xps")) filters.brand = "Dell";
+      else if (text.includes("acer") || text.includes("nitro") || text.includes("predator") || text.includes("swift") || text.includes("aspire")) filters.brand = "Acer";
+      else if (text.includes("msi") || text.includes("cyborg") || text.includes("katana")) filters.brand = "MSI";
+      else if (text.includes("samsung") || text.includes("galaxy book")) filters.brand = "Samsung";
+    } else {
+      if (text.includes("iphone") || text.includes("apple")) filters.brand = "Apple";
+      else if (text.includes("samsung")) filters.brand = "Samsung";
+      else if (text.includes("oneplus")) filters.brand = "OnePlus";
+      else if (text.includes("realme")) filters.brand = "Realme";
+      else if (text.includes("vivo")) filters.brand = "Vivo";
+      else if (text.includes("oppo")) filters.brand = "Oppo";
+      else if (text.includes("xiaomi") || text.includes("redmi") || text.includes("mi ")) filters.brand = "Xiaomi";
+      else if (text.includes("poco")) filters.brand = "Poco";
+      else if (text.includes("motorola") || text.includes("moto")) filters.brand = "Motorola";
+      else if (text.includes("iqoo")) filters.brand = "IQOO";
+      else if (text.includes("pixel") || text.includes("google")) filters.brand = "Google";
+      else if (text.includes("nothing") || text.includes("cmf")) filters.brand = "Nothing";
+    }
+
+    // Price cap
     if (text.includes("lakh") || text.includes("lac")) {
       const lakhMatch = text.match(/(?:under|below|less than|around|\b)\s*(\d+(?:\.\d+)?)\s*(?:lakh|lac)/);
       if (lakhMatch) filters.price = Math.round(parseFloat(lakhMatch[1]) * 100000);
@@ -1668,45 +1813,65 @@ class AuraCompareApp {
       }
     }
 
-    // Extract battery
-    const batteryRegex = /(\d{4})\s*(?:mah|m ah)/;
-    let bmatch = text.match(batteryRegex);
-    if (bmatch) {
-      filters.battery = parseInt(bmatch[1]);
-    } else if (text.includes("big battery") || text.includes("huge battery") || text.includes("battery monster")) {
-      filters.battery = 5500;
-    }
-
-    // Extract display spec
-    if (text.includes("2k") || text.includes("qhd")) filters.display = "2K";
-    else if (text.includes("1.5k")) filters.display = "1.5K";
-    else if (text.includes("amoled")) filters.display = "AMOLED";
-    else if (text.includes("oled") || text.includes("poled")) filters.display = "OLED";
-    else if (text.includes("144hz")) filters.display = "144Hz";
-    else if (text.includes("120hz")) filters.display = "120Hz";
-    else if (text.includes("curved")) filters.display = "Curved";
-
-    // Extract RAM
+    // RAM detection
     const ramMatch = text.match(/(\d+)\s*(?:gb ram|gb)/);
-    if (ramMatch && parseInt(ramMatch[1]) >= 4 && parseInt(ramMatch[1]) <= 16) {
-      filters.ram = `${ramMatch[1]}GB`;
+    if (ramMatch) {
+      const ramVal = parseInt(ramMatch[1]);
+      if ([4, 6, 8, 12, 16, 18, 24, 32].includes(ramVal)) {
+        filters.ram = `${ramVal}GB`;
+      }
     }
+
+    // GPU detection
+    const gpuMatch = text.match(/(rtx\s*\d{4}|gtx\s*\d{4})/i);
+    if (gpuMatch) {
+      filters.gpu = gpuMatch[1].toUpperCase().replace(/\s+/g, " ");
+    }
+
+    // Processor detection
+    if (text.includes("i7") || text.includes("core i7")) filters.processor = "Core i7";
+    else if (text.includes("i5") || text.includes("core i5")) filters.processor = "Core i5";
+    else if (text.includes("i3") || text.includes("core i3")) filters.processor = "Core i3";
+    else if (text.includes("ryzen 7")) filters.processor = "Ryzen 7";
+    else if (text.includes("ryzen 5")) filters.processor = "Ryzen 5";
+    else if (text.includes("m3")) filters.processor = "M3";
+    else if (text.includes("m2")) filters.processor = "M2";
+    else if (text.includes("m1")) filters.processor = "M1";
+
+    // Battery
+    if (filters.category === "Mobile") {
+      const batteryRegex = /(\d{4})\s*(?:mah|m ah)/;
+      let bmatch = text.match(batteryRegex);
+      if (bmatch) filters.battery = parseInt(bmatch[1]);
+    }
+
+    // Display
+    if (text.includes("oled")) filters.display = "OLED";
+    else if (text.includes("144hz")) filters.display = "144Hz";
+    else if (text.includes("165hz")) filters.display = "165Hz";
+    else if (text.includes("120hz")) filters.display = "120Hz";
+    else if (text.includes("1.5k")) filters.display = "1.5K";
+    else if (text.includes("2.8k") || text.includes("2k") || text.includes("qhd")) filters.display = "2K";
 
     return filters;
   }
 
-  // RANKING ENGINE FOR REAL MARKET PRODUCTS
+  // RANKING ENGINE (SEPARATE LAPTOP AND MOBILE LISTINGS)
   computeComparisonRanking(filters, queryText = "") {
     let results = [];
+    const isLaptop = filters.category === "Laptop";
+    const dataset = isLaptop ? laptopDatabase : mobileDatabase;
     const targetBrand = filters.brand ? filters.brand.toLowerCase() : null;
 
-    // Filter market product database by brand and budget
-    let candidatePool = productDatabase.filter(p => {
+    let candidatePool = dataset.filter(p => {
       if (targetBrand) {
         const brandMatch = p.brand.toLowerCase() === targetBrand ||
                            p.name.toLowerCase().includes(targetBrand) ||
-                           (targetBrand === "apple" && p.name.toLowerCase().includes("iphone")) ||
-                           (targetBrand === "xiaomi" && (p.brand.toLowerCase() === "redmi" || p.brand.toLowerCase() === "poco"));
+                           (targetBrand === "apple" && (p.name.toLowerCase().includes("macbook") || p.name.toLowerCase().includes("iphone"))) ||
+                           (targetBrand === "asus" && (p.name.toLowerCase().includes("tuf") || p.name.toLowerCase().includes("rog") || p.name.toLowerCase().includes("vivobook"))) ||
+                           (targetBrand === "hp" && (p.name.toLowerCase().includes("victus") || p.name.toLowerCase().includes("pavilion") || p.name.toLowerCase().includes("omen"))) ||
+                           (targetBrand === "lenovo" && (p.name.toLowerCase().includes("loq") || p.name.toLowerCase().includes("legion") || p.name.toLowerCase().includes("ideapad"))) ||
+                           (targetBrand === "acer" && (p.name.toLowerCase().includes("nitro") || p.name.toLowerCase().includes("predator") || p.name.toLowerCase().includes("aspire")));
         if (!brandMatch) return false;
       }
       if (filters.price && p.price > filters.price * 1.15) {
@@ -1715,18 +1880,16 @@ class AuraCompareApp {
       return true;
     });
 
-    // If exact brand/price filter yielded 0 results, fall back to keyword search in market db
     if (candidatePool.length === 0) {
-      const qTokens = queryText.toLowerCase().split(/\s+/).filter(t => t.length > 2 && !["under", "below", "phone", "mobile", "with", "than", "best"].includes(t));
-      candidatePool = productDatabase.filter(p => {
+      const qTokens = queryText.toLowerCase().split(/\s+/).filter(t => t.length > 2 && !["under", "below", "laptop", "mobile", "phone", "with", "than", "best"].includes(t));
+      candidatePool = dataset.filter(p => {
         const pText = `${p.name} ${p.brand} ${p.details}`.toLowerCase();
         return qTokens.some(t => pText.includes(t));
       });
     }
 
-    // Default fallback to popular market models if still empty
     if (candidatePool.length === 0) {
-      candidatePool = productDatabase.slice(0, 8);
+      candidatePool = dataset.slice(0, 8);
     }
 
     candidatePool.forEach(p => {
@@ -1736,7 +1899,7 @@ class AuraCompareApp {
       if (filters.price) {
         if (p.price <= filters.price) {
           let priceRatio = p.price / filters.price;
-          if (priceRatio > 0.9) reasons.push("Nearing budget cap");
+          if (priceRatio > 0.9) reasons.push("Nearing budget limit");
           else reasons.push(`Well within budget (₹${p.price.toLocaleString()})`);
         } else {
           score -= 30;
@@ -1744,14 +1907,27 @@ class AuraCompareApp {
         }
       }
 
-      if (filters.battery) {
-        if (p.battery >= filters.battery) {
-          reasons.push(`Battery meets/exceeds target (${p.battery}mAh)`);
+      if (filters.ram) {
+        if (p.ram && p.ram.toLowerCase().includes(filters.ram.toLowerCase())) {
+          reasons.push(`Matches requested RAM: ${p.ram}`);
         } else {
-          let gap = filters.battery - p.battery;
-          let penalty = Math.min(25, Math.ceil(gap / 100) * 3);
-          score -= penalty;
-          reasons.push(`Battery capacity is ${p.battery}mAh (-${gap}mAh)`);
+          score -= 10;
+        }
+      }
+
+      if (filters.gpu) {
+        if (p.details && p.details.toUpperCase().includes(filters.gpu)) {
+          reasons.push(`Matches dedicated GPU: ${filters.gpu}`);
+        } else {
+          score -= 20;
+        }
+      }
+
+      if (filters.processor) {
+        if (p.processor && p.processor.toLowerCase().includes(filters.processor.toLowerCase())) {
+          reasons.push(`Matches processor: ${p.processor}`);
+        } else {
+          score -= 10;
         }
       }
 
@@ -1761,8 +1937,7 @@ class AuraCompareApp {
         if (pDisplayLower.includes(fDisplayLower)) {
           reasons.push(`Matches display criteria: ${filters.display}`);
         } else {
-          score -= 10;
-          reasons.push(`Display panel differs (${p.display})`);
+          score -= 5;
         }
       }
 
@@ -1783,7 +1958,7 @@ class AuraCompareApp {
     return results;
   }
 
-  // RENDER COMPARISON MATRIX & ANALYSIS
+  // RENDER RESULTS ACCORDING TO CATEGORY
   renderComparisonResult(queryText, filters, results) {
     const synthesisBody = document.getElementById("rag-synthesis-body");
     const sourcesContainer = document.getElementById("retrieved-sources-log-container");
@@ -1795,11 +1970,12 @@ class AuraCompareApp {
     tableBody.innerHTML = "";
 
     let aiExplanation = "";
+    const isLaptop = filters.category === "Laptop";
 
     if (results.length === 0) {
       aiExplanation = `
         <div class="synthesis-text">
-          <p><strong>Market Search Analysis:</strong> We searched active market listings but found <strong>0 products</strong> matching your criteria under ${filters.price ? '₹' + filters.price.toLocaleString() : 'requested bounds'}.</p>
+          <p><strong>Market Search Analysis:</strong> We searched active market listings but found <strong>0 ${filters.category.toLowerCase()}s</strong> matching your criteria under ${filters.price ? '₹' + filters.price.toLocaleString() : 'requested bounds'}.</p>
           <p class="text-secondary">Try adjusting budget limits or query terms.</p>
         </div>
       `;
@@ -1807,31 +1983,30 @@ class AuraCompareApp {
       let topMatch = results[0];
       
       aiExplanation = `<div class="synthesis-text">`;
-      aiExplanation += `<p>Based on live market specifications for <em>"${queryText}"</em>, the top recommended product currently available in the market is the <span class="highlight-tag">${topMatch.name}</span>, priced at <strong>₹${topMatch.price.toLocaleString()}</strong> <span class="cite-pill" data-doc="${topMatch.id}">[1]</span>.`;
+      aiExplanation += `<p>Based on live market specifications for <em>"${queryText}"</em>, the top recommended <strong>${filters.category}</strong> currently existing in the market is the <span class="highlight-tag">${topMatch.name}</span>, priced at <strong>₹${topMatch.price.toLocaleString()}</strong> <span class="cite-pill" data-doc="${topMatch.id}">[1]</span>.`;
 
-      if (filters.battery) {
-        if (topMatch.battery >= filters.battery) {
-          aiExplanation += ` It easily fulfills your battery requirement of <strong>${filters.battery}mAh</strong> with a rated capacity of <strong>${topMatch.battery}mAh</strong>.`;
+      if (isLaptop) {
+        aiExplanation += ` Powered by the <strong>${topMatch.processor}</strong>, featuring <strong>${topMatch.ram}</strong>, <strong>${topMatch.storage}</strong>, and a <strong>${topMatch.display}</strong>.`;
+      } else {
+        if (filters.battery && topMatch.battery >= filters.battery) {
+          aiExplanation += ` It fulfills your battery requirement of <strong>${filters.battery}mAh</strong> with a capacity of <strong>${topMatch.battery}mAh</strong>.`;
         } else {
-          aiExplanation += ` It features a solid <strong>${topMatch.battery}mAh battery</strong> providing strong day-long endurance.`;
+          aiExplanation += ` It features a <strong>${topMatch.battery}mAh battery</strong> with <strong>${topMatch.display}</strong>.`;
         }
+        aiExplanation += ` Powered by <strong>${topMatch.processor || 'Octa-Core processor'}</strong> with <strong>${topMatch.ram || '8GB'} RAM</strong> and <strong>${topMatch.camera || 'High-res camera'}</strong>.`;
       }
 
-      if (filters.display) {
-        if (topMatch.display.toLowerCase().includes(filters.display.toLowerCase())) {
-          aiExplanation += ` It comes equipped with your requested <strong>${filters.display} panel</strong> (${topMatch.display}).`;
-        } else {
-          aiExplanation += ` The device features a vibrant <strong>${topMatch.display}</strong> screen.`;
-        }
-      }
-      
-      aiExplanation += ` It is powered by the <strong>${topMatch.processor || 'Octa-core processor'}</strong> with <strong>${topMatch.ram || '8GB'} RAM</strong> and <strong>${topMatch.camera || 'high resolution main camera'}</strong>.</p>`;
+      aiExplanation += `</p>`;
 
       const alternatives = results.slice(1, 4);
       if (alternatives.length > 0) {
-        aiExplanation += `<h4>Market Alternatives:</h4><ul>`;
+        aiExplanation += `<h4>Market ${filters.category} Alternatives:</h4><ul>`;
         alternatives.forEach((alt, idx) => {
-          aiExplanation += `<li><span class="highlight-tag">${alt.name}</span> at <strong>₹${alt.price.toLocaleString()}</strong> <span class="cite-pill" data-doc="${alt.id}">[${idx + 2}]</span> (${alt.battery}mAh battery, ${alt.display}).</li>`;
+          if (isLaptop) {
+            aiExplanation += `<li><span class="highlight-tag">${alt.name}</span> at <strong>₹${alt.price.toLocaleString()}</strong> <span class="cite-pill" data-doc="${alt.id}">[${idx + 2}]</span> (${alt.processor}, ${alt.ram}, ${alt.storage}, ${alt.display}).</li>`;
+          } else {
+            aiExplanation += `<li><span class="highlight-tag">${alt.name}</span> at <strong>₹${alt.price.toLocaleString()}</strong> <span class="cite-pill" data-doc="${alt.id}">[${idx + 2}]</span> (${alt.battery}mAh battery, ${alt.display}).</li>`;
+          }
         });
         aiExplanation += `</ul>`;
       }
@@ -1848,7 +2023,6 @@ class AuraCompareApp {
       });
     });
 
-    // Render Attribution Sources
     if (results.length > 0) {
       let contextSize = (JSON.stringify(results).length / 1024).toFixed(1);
       const ctxSizeEl = document.getElementById("sources-context-size");
@@ -1863,15 +2037,14 @@ class AuraCompareApp {
             <span class="source-log-meta">Match: ${r.matchScore}% | Source: ${r.source}</span>
           </div>
           <div class="source-log-body">
-            "Verified Price: ₹${r.price.toLocaleString()} | Display: ${r.display} | Battery: ${r.battery}mAh | Processor: ${r.processor || 'N/A'}"
+            "Verified Price: ₹${r.price.toLocaleString()} | Processor: ${r.processor} | Memory: ${r.ram} / ${r.storage} | Screen: ${r.display}"
           </div>
         `;
         sourcesContainer.appendChild(item);
       });
     }
 
-    // Render Comparison Table
-    if (tableCounter) tableCounter.textContent = `Found ${results.length} active devices currently existing in the market.`;
+    if (tableCounter) tableCounter.textContent = `Found ${results.length} active ${filters.category.toLowerCase()}s currently existing in the market.`;
     
     if (results.length > 0) {
       const lowestPriceInResults = Math.min(...results.map(o => o.price));
@@ -1887,10 +2060,14 @@ class AuraCompareApp {
           ? `<span class="best-price-badge">Best Price</span>`
           : "";
 
+        const specColContent = isLaptop
+          ? `<span style="font-family: var(--font-mono); font-size:12.5px;">${r.ram} / ${r.storage}</span>`
+          : `<span style="font-family: var(--font-mono); font-size:12.5px;">${typeof r.battery === 'number' ? r.battery + ' mAh' : r.battery}</span>`;
+
         tr.innerHTML = `
           <td>
             <div class="prod-details-cell">
-              <div class="prod-icon">${r.imageUrl}</div>
+              <div class="prod-icon">${r.imageUrl || (isLaptop ? '💻' : '📱')}</div>
               <div class="prod-name-stack">
                 <span class="prod-title">${r.name}</span>
                 <span class="prod-source-attribution">Ref: [${idx + 1}] (${r.source})</span>
@@ -1898,7 +2075,7 @@ class AuraCompareApp {
             </div>
           </td>
           <td><span style="font-weight:600; color:#fff;">${r.brand}</span></td>
-          <td><span style="font-family: var(--font-mono); font-size:12.5px;">${r.battery} mAh</span></td>
+          <td>${specColContent}</td>
           <td><span style="font-size:12.5px;">${r.display}</span></td>
           <td>
             <div style="display:flex; align-items:center; gap:6px;">
@@ -1933,14 +2110,13 @@ class AuraCompareApp {
       tableBody.innerHTML = `
         <tr>
           <td colspan="7" style="text-align:center; padding: 30px; color: var(--text-muted);">
-            No comparable models located. Broaden search criteria bounds.
+            No comparable ${filters.category.toLowerCase()}s located. Broaden search criteria bounds.
           </td>
         </tr>
       `;
     }
   }
 
-  // SAVED SEARCHES (HISTORY)
   saveQueryToHistory(queryText, filters, matchesCount) {
     const exists = this.history.find(h => h.query.toLowerCase() === queryText.toLowerCase());
     if (exists) return;
@@ -1974,7 +2150,6 @@ class AuraCompareApp {
     if (!tbody) return;
 
     tbody.innerHTML = "";
-    
     if (this.history.length === 0) {
       tbody.innerHTML = `
         <tr>
@@ -1989,13 +2164,12 @@ class AuraCompareApp {
     this.history.forEach(item => {
       const tr = document.createElement("tr");
 
-      let filterTxt = "";
+      let filterTxt = `[Cat: ${item.filters.category || 'Device'}] `;
       if (item.filters.brand) filterTxt += `[Brand: ${item.filters.brand}] `;
       if (item.filters.price) filterTxt += `[Price <= ₹${item.filters.price.toLocaleString()}] `;
-      if (item.filters.battery) filterTxt += `[Battery >= ${item.filters.battery}mAh] `;
-      if (item.filters.display) filterTxt += `[Display: ${item.filters.display}] `;
       if (item.filters.ram) filterTxt += `[RAM: ${item.filters.ram}] `;
-      if (!filterTxt) filterTxt = "[None]";
+      if (item.filters.gpu) filterTxt += `[GPU: ${item.filters.gpu}] `;
+      if (item.filters.processor) filterTxt += `[CPU: ${item.filters.processor}] `;
 
       tr.innerHTML = `
         <td><div class="history-query-cell" title="${item.query}">"${item.query}"</div></td>
@@ -2070,7 +2244,6 @@ window.onGoogleSignInSuccess = function(response) {
   }
 };
 
-// Instantiate application on DOM ready
 document.addEventListener("DOMContentLoaded", () => {
   window.AuraCompareInstance = new AuraCompareApp();
 });
